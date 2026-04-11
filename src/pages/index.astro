@@ -1,0 +1,1159 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PlaceholderImage from '../components/PlaceholderImage.astro';
+
+const title = 'Prana Wellness Club — Austin Pilates, Yoga, and Recovery';
+const description =
+  'A boutique Austin wellness studio for Reformer Pilates, Mat Pilates, and yoga, with sauna, steam, and cold plunge recovery. Move with intention. Rest with purpose.';
+
+const site = Astro.site ?? new URL('https://constanceit.github.io/prana-website/');
+const canonical = site.toString();
+const ogImage = new URL('/images/og/home.jpg', site).toString();
+
+const mapQuery = encodeURIComponent('1621 E 7th St, Austin, TX 78702');
+const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+const mapDirectionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HealthClub',
+  name: 'Prana Wellness Club',
+  url: canonical,
+  image: ogImage,
+  email: 'hello@pranawellness.love',
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '1621 E 7th St',
+    addressLocality: 'Austin',
+    addressRegion: 'TX',
+    postalCode: '78702',
+    addressCountry: 'US',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    // TODO: confirm exact latitude/longitude for 1621 E 7th St, Austin, TX 78702.
+    // Values below are approximate based on the block's location in East Austin.
+    latitude: 30.2636,
+    longitude: -97.7223,
+  },
+  // TODO: add openingHoursSpecification once studio hours are supplied.
+};
+
+const tiles = [
+  {
+    number: '01 — Practice',
+    label: 'Yoga',
+    image: '/images/home/yoga-card.jpg',
+    alt: 'Prana yoga studio during a class',
+    description:
+      'Heated and unheated vinyasa, hatha, yin, and slow flow. Morning sessions, lunch breaks, and Wine Down Wednesdays. Open to every level.',
+    link: { href: '/classes', label: 'See the schedule' },
+  },
+  {
+    number: '02 — Strengthen',
+    label: 'Pilates',
+    image: '/images/home/pilates-card.jpg',
+    alt: 'A Pilates reformer class at Prana',
+    description:
+      'Reformer and mat classes built around posture, core, and long muscle tone. Small group sizes so instructors can actually adjust your form.',
+    link: { href: '/classes', label: 'See the schedule' },
+  },
+  {
+    number: '03 — Restore',
+    label: 'The Space',
+    image: '/images/home/space-card.jpg',
+    alt: 'The wooden reformers and recovery space at Prana',
+    description:
+      'Sauna, steam, cold plunge, and a quiet lounge to come down from the heat. Included with membership, open to class guests.',
+    link: { href: '/studio', label: 'Tour the studio' },
+  },
+];
+
+const featuredClasses = [
+  {
+    category: 'Vinyasa',
+    title: 'Heated Vinyasa',
+    description:
+      'A flowing, breath-led practice in a warm room. Builds strength, sweat, and stillness in equal measure.',
+    meta: ['60 min', 'Heated 95°F'],
+    href: '/classes/heated-vinyasa',
+  },
+  {
+    category: 'Pilates',
+    title: 'Pilates Reformer',
+    description:
+      'Small-group Reformer work focused on posture, control, and long muscle tone. Great for first-timers and regulars.',
+    meta: ['50 min', 'Neutral'],
+    href: '/classes/pilates-reformer',
+  },
+  {
+    category: 'Yin',
+    title: 'Yin',
+    description:
+      'Long holds, deep breath, and quiet mats. A reset for anyone living in their shoulders or their phone.',
+    meta: ['75 min', 'Warm 80°F'],
+    href: '/classes/yin',
+  },
+  {
+    category: 'Strength',
+    title: 'Strength & Mobility Flow',
+    description:
+      'Loaded strength work woven into a mobility practice. For when you want yoga to hit like a training session.',
+    meta: ['55 min', 'Neutral'],
+    href: '/classes/strength-mobility-flow',
+  },
+];
+---
+
+<BaseLayout title={title} description={description} ogImage="/images/og/home.jpg" canonical={canonical}>
+  <script type="application/ld+json" slot="jsonld" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- SECTION 1 — HERO -->
+  <section class="hero" aria-labelledby="hero-headline">
+    <div class="hero__media">
+      <video
+        class="hero__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/images/home/hero-poster.jpg"
+        aria-hidden="true"
+      >
+        <source src="/videos/home/hero-bg.mp4" type="video/mp4" />
+        <source src="/videos/home/hero-bg.mov" type="video/quicktime" />
+      </video>
+      <div class="hero__gradient" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero__content container">
+      <span class="eyebrow hero__eyebrow">Austin · Est. 2024</span>
+      <h1 id="hero-headline" class="hero__headline">
+        Move with intention.<br />Rest with purpose.
+      </h1>
+      <p class="hero__support">A boutique Austin studio for Pilates, yoga, and recovery.</p>
+      <a href="/book" class="btn btn-primary-light hero__cta">Book a Class</a>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span class="eyebrow">Scroll</span>
+      <span class="hero__scroll-line"></span>
+    </div>
+  </section>
+
+  <!-- SECTION 2 — WELCOME -->
+  <section class="welcome">
+    <div class="welcome__inner">
+      <span class="eyebrow welcome__eyebrow">Welcome to Prana</span>
+      <h2 class="welcome__headline">A studio built around how you actually want to feel.</h2>
+      <div class="welcome__prose">
+        <p>
+          Prana is a boutique wellness club in South Austin. Reformer and Mat Pilates, vinyasa,
+          hatha, yin, recovery. All of it under one roof, all of it taught by people who live in
+          this neighborhood and want you to keep coming back.
+        </p>
+        <p>
+          We built the studio the way we wished one existed when we were tired of fluorescent gyms
+          and chain yoga rooms. Warm wood, real plants, natural light, equipment that actually
+          holds up, teachers who learn your name. Come once and you'll get it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 — WHAT WE OFFER -->
+  <section class="offer">
+    <div class="container">
+      <div class="offer__header">
+        <span class="eyebrow">What we offer</span>
+        <h2 class="offer__headline">Three ways to show up.</h2>
+      </div>
+
+      <ul class="offer__grid">
+        {tiles.map((tile) => (
+          <li class="tile">
+            <a href={tile.link.href} class="tile__link">
+              <div class="tile__image-wrap">
+                <img
+                  src={tile.image}
+                  alt={tile.alt}
+                  width="720"
+                  height="864"
+                  loading="lazy"
+                  class="tile__image"
+                />
+              </div>
+              <div class="tile__body">
+                <span class="eyebrow tile__eyebrow">{tile.number}</span>
+                <h3 class="tile__label">{tile.label}</h3>
+                <p class="tile__description">{tile.description}</p>
+                <span class="link-arrow">{tile.link.label} <span aria-hidden="true">→</span></span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- SECTION 4 — OUR STORY TEASER -->
+  <section class="story">
+    <div class="story__grid">
+      <div class="story__image">
+        <PlaceholderImage
+          ratio="4 / 5"
+          label="Founder portrait — to be supplied"
+          alt="Placeholder image for a portrait of the Prana Wellness Club founder"
+        />
+      </div>
+
+      <div class="story__copy">
+        <span class="eyebrow">Our story</span>
+        <h2 class="story__headline">A place to come back to.</h2>
+
+        <blockquote class="story__quote">
+          "We wanted a room that felt like it exhaled when you walked in."
+        </blockquote>
+
+        <p class="story__lead">
+          Prana started as a small idea between friends who were tired of practicing in rooms
+          that felt nothing like the practice. Today it's a full studio in South Austin where
+          the reformers are wooden, the plants are real, and the people at the front desk
+          actually remember your name.
+        </p>
+        <p class="story__body">
+          We think of ourselves less like a gym and more like a third place. Somewhere between
+          your home and your work where the only agenda is to feel better than you did when you
+          walked in.
+        </p>
+
+        <a href="/studio" class="link-ghost story__link">Read the full story <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 — FEATURED CLASSES -->
+  <section class="featured">
+    <div class="container">
+      <div class="featured__header">
+        <span class="eyebrow">On the schedule</span>
+        <h2 class="featured__headline">Classes worth showing up for.</h2>
+      </div>
+
+      <ul class="featured__grid">
+        {featuredClasses.map((c) => (
+          <li class="class-card">
+            <a href={c.href} class="class-card__link">
+              <div class="class-card__image">
+                <PlaceholderImage
+                  ratio="3 / 2"
+                  label={`Class photo — ${c.title}`}
+                  alt={`Placeholder image for the ${c.title} class`}
+                />
+              </div>
+              <div class="class-card__body">
+                <span class="eyebrow class-card__eyebrow">{c.category}</span>
+                <h3 class="class-card__title">{c.title}</h3>
+                <p class="class-card__description">{c.description}</p>
+                <div class="class-card__meta">
+                  {c.meta.map((m) => <span class="class-card__meta-item">{m}</span>)}
+                </div>
+                <span class="link-arrow">View class <span aria-hidden="true">→</span></span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="featured__cta">
+        <a href="/classes" class="btn btn-ghost">See all classes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 — THE SPACE TEASER -->
+  <section class="space" aria-labelledby="space-headline">
+    <div class="space__media">
+      <video
+        class="space__video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/images/home/hero-poster.jpg"
+        aria-hidden="true"
+      >
+        <source src="/videos/home/space-card.mp4" type="video/mp4" />
+      </video>
+      <div class="space__gradient" aria-hidden="true"></div>
+    </div>
+
+    <div class="space__content container">
+      <span class="eyebrow space__eyebrow">The Space</span>
+      <h2 id="space-headline" class="space__headline">Heat. Cold. Quiet.</h2>
+      <p class="space__body">
+        An infrared sauna, a cold plunge, a steam room, and a lounge with the best elixir bar in
+        town. Our recovery space is included with every membership.
+      </p>
+      <a href="/studio" class="link-ghost space__link">See the space <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- SECTION 7 — MEMBERSHIP INVITATION -->
+  <section class="membership">
+    <div class="membership__grid">
+      <div class="membership__image-wrap">
+        <img
+          src="/images/home/membership.jpg"
+          alt="A quiet corner of the Prana studio"
+          width="960"
+          height="1200"
+          loading="lazy"
+          class="membership__image"
+        />
+      </div>
+
+      <div class="membership__copy">
+        <span class="eyebrow">Membership</span>
+        <h2 class="membership__headline">One membership. The whole studio.</h2>
+        <p class="membership__body">
+          Unlimited classes across yoga, Pilates, and Reformer. Full access to the sauna, steam
+          room, and cold plunge. First dibs on events and workshops. Cancel any time.
+        </p>
+        <span class="eyebrow membership__founding">Now accepting founding members</span>
+        <div class="membership__actions">
+          <a href="/memberships" class="btn btn-primary">See membership options</a>
+          <a href="/book" class="link-ghost">Or book a single class <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8 — FIND US -->
+  <section class="find">
+    <div class="find__grid">
+      <div class="find__info">
+        <span class="eyebrow">Find us</span>
+        <h2 class="find__headline">East Austin, on 7th.</h2>
+
+        <address class="find__address">
+          1621 E 7th St<br />
+          Austin, TX 78702
+        </address>
+
+        <p class="find__hours">Hours &mdash; to be confirmed</p>
+
+        <p class="find__contact">
+          Email: <a href="mailto:hello@pranawellness.love">hello@pranawellness.love</a>
+        </p>
+
+        <div class="find__actions">
+          <a href={mapDirectionsHref} target="_blank" rel="noreferrer noopener" class="btn btn-primary">Get directions</a>
+          <a href="/contact" class="link-ghost">Questions? Contact us <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <div class="find__map-wrap">
+        <iframe
+          class="find__map"
+          src={mapEmbedSrc}
+          title="Map of Prana Wellness Club at 1621 E 7th St, Austin, TX"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ==================== SECTION 1 — HERO ==================== */
+  .hero {
+    position: relative;
+    min-height: 88svh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: var(--space-4xl);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--color-deep-brown);
+  }
+
+  .hero__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(58, 42, 34, 0.72) 0%,
+      rgba(58, 42, 34, 0.4) 25%,
+      rgba(58, 42, 34, 0) 55%
+    );
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__video {
+      display: none;
+    }
+    .hero__media {
+      background-image: url('/images/home/hero-poster.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  .hero__content {
+    position: relative;
+    max-width: var(--content-max);
+    width: 100%;
+    padding-bottom: var(--space-2xl);
+  }
+
+  .hero__eyebrow {
+    color: var(--color-warm-white);
+    opacity: 0.9;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__headline {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: var(--size-h1);
+    line-height: var(--line-tight);
+    color: var(--color-warm-white);
+    max-width: 14ch;
+    margin-bottom: var(--space-lg);
+    text-wrap: balance;
+  }
+
+  .hero__support {
+    font-family: var(--font-body);
+    font-size: var(--size-body-lg);
+    color: var(--color-warm-white);
+    opacity: 0.85;
+    max-width: 48ch;
+    line-height: 1.5;
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero__cta {
+    margin-top: var(--space-xs);
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: var(--space-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-warm-white);
+    opacity: 0.75;
+  }
+
+  .hero__scroll .eyebrow {
+    color: var(--color-warm-white);
+  }
+
+  .hero__scroll-line {
+    display: block;
+    width: 1px;
+    height: 48px;
+    background-color: var(--color-warm-white);
+    opacity: 0.6;
+    animation: scrollBob 2.4s var(--ease-out) infinite;
+    transform-origin: top;
+  }
+
+  @keyframes scrollBob {
+    0%, 100% { transform: translateY(0) scaleY(1); opacity: 0.6; }
+    50% { transform: translateY(6px) scaleY(0.88); opacity: 0.3; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__scroll-line { animation: none; }
+  }
+
+  /* ==================== SECTION 2 — WELCOME ==================== */
+  .welcome {
+    background-color: var(--color-cream);
+    padding: var(--space-4xl) var(--space-lg);
+  }
+
+  @media (min-width: 1024px) {
+    .welcome {
+      padding: var(--space-6xl) var(--space-2xl);
+    }
+  }
+
+  .welcome__inner {
+    max-width: var(--content-narrow);
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .welcome__eyebrow {
+    color: var(--color-terracotta);
+    display: inline-block;
+    margin-bottom: var(--space-lg);
+  }
+
+  .welcome__headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--size-h2);
+    line-height: var(--line-tight);
+    color: var(--color-deep-brown);
+    max-width: 20ch;
+    margin: 0 auto var(--space-2xl);
+    text-wrap: balance;
+  }
+
+  .welcome__prose {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    text-align: left;
+    max-width: var(--content-narrow);
+    margin-inline: auto;
+  }
+
+  .welcome__prose p {
+    font-size: var(--size-body);
+    line-height: var(--line-body);
+    color: var(--color-espresso);
+  }
+
+  /* ==================== SECTION 3 — OFFER ==================== */
+  .offer {
+    background-color: var(--color-cream);
+    padding: var(--space-4xl) 0;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  @media (min-width: 1024px) {
+    .offer { padding: var(--space-5xl) 0; }
+  }
+
+  .offer__header {
+    margin-bottom: var(--space-3xl);
+    max-width: 36ch;
+  }
+
+  .offer__header .eyebrow {
+    color: var(--color-terracotta);
+    margin-bottom: var(--space-md);
+  }
+
+  .offer__headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--size-h2);
+    line-height: var(--line-tight);
+    color: var(--color-deep-brown);
+  }
+
+  .offer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  @media (min-width: 640px) {
+    .offer__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .offer__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+    }
+  }
+
+  .tile {
+    display: block;
+  }
+
+  .tile__link {
+    display: block;
+    color: inherit;
+  }
+
+  .tile__image-wrap {
+    aspect-ratio: 5 / 6;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-placeholder);
+    margin-bottom: var(--space-lg);
+  }
+
+  .tile__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.97);
+    transition: filter var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+  }
+
+  .tile__link:hover .tile__image,
+  .tile__link:focus-visible .tile__image {
+    filter: brightness(1.02);
+    transform: scale(1.01);
+  }
+
+  .tile__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .tile__eyebrow {
+    color: var(--color-terracotta);
+    margin-bottom: var(--space-xs);
+  }
+
+  .tile__label {
+    font-family: var(--font-display);
+    font-size: var(--size-h3);
+    font-weight: 500;
+    color: var(--color-deep-brown);
+    line-height: var(--line-snug);
+    transition: color var(--dur-med) var(--ease-out);
+  }
+
+  .tile__link:hover .tile__label,
+  .tile__link:focus-visible .tile__label {
+    color: var(--color-terracotta);
+  }
+
+  .tile__description {
+    font-size: var(--size-body);
+    line-height: var(--line-body);
+    color: var(--color-espresso);
+    max-width: 42ch;
+  }
+
+  /* ==================== SECTION 4 — STORY ==================== */
+  .story {
+    background-color: var(--color-warm-white);
+    padding: var(--space-4xl) var(--space-lg);
+  }
+
+  @media (min-width: 1024px) {
+    .story { padding: var(--space-6xl) var(--space-2xl); }
+  }
+
+  .story__grid {
+    max-width: var(--content-max);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  @media (min-width: 1024px) {
+    .story__grid {
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+  }
+
+  .story__image {
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .story__image {
+      grid-column: 1 / span 5;
+      margin-top: var(--space-3xl);
+    }
+  }
+
+  .story__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 1024px) {
+    .story__copy {
+      grid-column: 7 / span 5;
+    }
+  }
+
+  .story__copy .eyebrow {
+    color: var(--color-terracotta);
+  }
+
+  .story__headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--size-h2);
+    line-height: var(--line-tight);
+    color: var(--color-deep-brown);
+    max-width: 15ch;
+  }
+
+  .story__quote {
+    font-family: var(--font-display);
+    font-size: var(--size-h3);
+    font-weight: 400;
+    line-height: var(--line-snug);
+    color: var(--color-terracotta);
+    max-width: 18ch;
+    border-top: 1px solid var(--color-hairline);
+    padding-top: var(--space-sm);
+    margin: var(--space-md) 0;
+    font-style: italic;
+  }
+
+  .story__lead {
+    font-size: var(--size-body-lg);
+    line-height: var(--line-body);
+    color: var(--color-espresso);
+    max-width: 44ch;
+  }
+
+  .story__body {
+    font-size: var(--size-body);
+    line-height: var(--line-body);
+    color: var(--color-espresso);
+    max-width: 44ch;
+  }
+
+  .story__link {
+    align-self: flex-start;
+    margin-top: var(--space-md);
+  }
+
+  /* ==================== SECTION 5 — FEATURED CLASSES ==================== */
+  .featured {
+    background-color: var(--color-cream);
+    padding: var(--space-4xl) 0;
+  }
+
+  @media (min-width: 1024px) {
+    .featured { padding: var(--space-5xl) 0; }
+  }
+
+  .featured__header {
+    margin-bottom: var(--space-3xl);
+    max-width: 36ch;
+  }
+
+  .featured__header .eyebrow {
+    color: var(--color-terracotta);
+    margin-bottom: var(--space-md);
+  }
+
+  .featured__headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--size-h2);
+    line-height: var(--line-tight);
+    color: var(--color-deep-brown);
+  }
+
+  .featured__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  @media (min-width: 640px) {
+    .featured__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-xl);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .featured__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .class-card {
+    display: block;
+  }
+
+  .class-card__link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    color: inherit;
+    height: 100%;
+  }
+
+  .class-card__image {
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+  }
+
+  .class-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding-top: var(--space-xs);
+  }
+
+  .class-card__eyebrow {
+    color: var(--color-terracotta);
+  }
+
+  .class-card__title {
+    font-family: var(--font-display);
+    font-size: var(--size-h3);
+    font-weight: 500;
+    color: var(--color-deep-brown);
+    line-height: var(--line-snug);
+    margin-top: var(--space-xs);
+    transition: color var(--dur-med) var(--ease-out);
+  }
+
+  .class-card__link:hover .class-card__title,
+  .class-card__link:focus-visible .class-card__title {
+    color: var(--color-terracotta);
+  }
+
+  .class-card__description {
+    font-size: var(--size-body-sm);
+    line-height: var(--line-body);
+    color: var(--color-espresso);
+    margin-top: var(--space-xs);
+  }
+
+  .class-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+    font-family: var(--font-body);
+    font-size: var(--size-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-eyebrow);
+    color: var(--color-espresso);
+    opacity: 0.7;
+  }
+
+  .class-card__meta-item {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .class-card__meta-item + .class-card__meta-item::before {
+    content: '·';
+    margin-right: var(--space-md);
+    margin-left: calc(var(--space-md) * -1);
+    opacity: 0.5;
+  }
+
+  .class-card .link-arrow {
+    margin-top: var(--space-md);
+  }
+
+  .featured__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-3xl);
+  }
+
+  /* ==================== SECTION 6 — THE SPACE TEASER ==================== */
+  .space {
+    position: relative;
+    min-height: 60svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    isolation: isolate;
+    background-color: var(--color-deep-brown);
+  }
+
+  @media (min-width: 1024px) {
+    .space { min-height: 70svh; }
+  }
+
+  .space__media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  .space__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .space__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(58, 42, 34, 0.75) 0%,
+      rgba(58, 42, 34, 0.35) 35%,
+      rgba(58, 42, 34, 0) 60%
+    );
+  }
+
+  .space__content {
+    position: relative;
+    padding-block: var(--space-3xl);
+    max-width: var(--content-max);
+    width: 100%;
+  }
+
+  .space__eyebrow {
+    color: var(--color-warm-white);
+    opacity: 0.9;
+    margin-bottom: var(--space-lg);
+    display: inline-block;
+  }
+
+  .space__headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--size-h2);
+    line-height: var(--line-tight);
+    color: var(--color-warm-white);
+    max-width: 14ch;
+    margin-bottom: var(--space-lg);
+  }
+
+  .space__body {
+    font-size: var(--size-body);
+    line-height: var(--line-body);
+    color: var(--color-warm-white);
+    opacity: 0.85;
+    max-width: 40ch;
+    margin-bottom: var(--space-lg);
+  }
+
+  .space__link {
+    color: var(--color-warm-white);
+    border-bottom-color: rgba(245, 239, 226, 0.4);
+  }
+
+  .space__link:hover,
+  .space__link:focus-visible {
+    color: var(--color-golden);
+    border-bottom-color: var(--color-golden);
+  }
+
+  /* ==================== SECTION 7 — MEMBERSHIP ==================== */
+  .membership {
+    background-color: var(--color-cream);
+    padding: var(--space-4xl) var(--space-lg);
+  }
+
+  @media (min-width: 1024px) {
+    .membership { padding: var(--space-5xl) var(--space-2xl); }
+  }
+
+  .membership__grid {
+    max-width: var(--content-max);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .membership__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4xl);
+    }
+  }
+
+  .membership__image-wrap {
+    order: -1;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-placeholder);
+  }
+
+  @media (min-width: 1024px) {
+    .membership__image-wrap {
+      order: 2;
+      aspect-ratio: 4 / 5;
+    }
+  }
+
+  .membership__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .membership__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: var(--content-narrow);
+  }
+
+  .membership__copy .eyebrow {
+    color: var(--color-terracotta);
+  }
+
+  .membership__headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--size-h2);
+    line-height: var(--line-tight);
+    color: var(--color-deep-brown);
+    margin-bottom: var(--space-xs);
+  }
+
+  .membership__body {
+    font-size: var(--size-body);
+    line-height: var(--line-body);
+    color: var(--color-espresso);
+  }
+
+  .membership__founding {
+    color: var(--color-terracotta);
+    margin-top: var(--space-sm);
+  }
+
+  .membership__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    margin-top: var(--space-md);
+  }
+
+  @media (min-width: 640px) {
+    .membership__actions {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  /* ==================== SECTION 8 — FIND US ==================== */
+  .find {
+    background-color: var(--color-warm-white);
+    padding: var(--space-4xl) var(--space-lg);
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  @media (min-width: 1024px) {
+    .find { padding: var(--space-5xl) var(--space-2xl); }
+  }
+
+  .find__grid {
+    max-width: var(--content-max);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+
+  @media (min-width: 1024px) {
+    .find__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4xl);
+    }
+  }
+
+  .find__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .find__info .eyebrow {
+    color: var(--color-terracotta);
+  }
+
+  .find__headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--size-h2);
+    line-height: var(--line-tight);
+    color: var(--color-deep-brown);
+    margin-bottom: var(--space-sm);
+  }
+
+  .find__address {
+    font-family: var(--font-body);
+    font-size: var(--size-body-lg);
+    font-style: normal;
+    color: var(--color-espresso);
+    line-height: var(--line-body);
+  }
+
+  .find__hours,
+  .find__contact {
+    font-size: var(--size-body);
+    color: var(--color-espresso);
+  }
+
+  .find__contact a:hover {
+    color: var(--color-terracotta);
+    border-bottom: 1px solid var(--color-terracotta);
+  }
+
+  .find__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+
+  @media (min-width: 640px) {
+    .find__actions {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .find__map-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .find__map-wrap { aspect-ratio: 4 / 5; }
+  }
+
+  .find__map {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+</style>
