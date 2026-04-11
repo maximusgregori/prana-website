@@ -18,6 +18,11 @@ pnpm-debug.log*
 # macOS
 .DS_Store
 
+# playwright mcp and review screenshots
+.playwright-mcp/
+home-*.jpeg
+home-*.png
+
 # editor
 .vscode/*
 !.vscode/extensions.json
