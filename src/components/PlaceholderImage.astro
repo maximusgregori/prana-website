@@ -1,0 +1,56 @@
+---
+interface Props {
+  ratio?: string;
+  width?: number;
+  height?: number;
+  label: string;
+  alt: string;
+  class?: string;
+}
+
+const { ratio, width, height, label, alt, class: className = '' } = Astro.props;
+const aspect = ratio ?? (width && height ? `${width} / ${height}` : '4 / 5');
+---
+
+<div class={`placeholder ${className}`} style={`aspect-ratio: ${aspect};`} role="img" aria-label={alt}>
+  <div class="placeholder__inner">
+    <span class="eyebrow placeholder__eyebrow">Placeholder</span>
+    <span class="placeholder__label">{label}</span>
+  </div>
+</div>
+
+<style>
+  .placeholder {
+    background-color: var(--color-placeholder);
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .placeholder__inner {
+    position: absolute;
+    inset: 8px;
+    border: 1px dashed var(--color-hairline);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    text-align: center;
+    padding: var(--space-lg);
+  }
+
+  .placeholder__eyebrow {
+    color: var(--color-espresso);
+    opacity: 0.6;
+  }
+
+  .placeholder__label {
+    font-family: var(--font-body);
+    font-size: var(--size-body-sm);
+    font-weight: 500;
+    color: var(--color-espresso);
+    max-width: 24ch;
+    line-height: 1.4;
+  }
+</style>

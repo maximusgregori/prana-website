@@ -1,0 +1,213 @@
+---
+const footerNav = [
+  { href: '/studio', label: 'The Studio' },
+  { href: '/classes', label: 'Classes' },
+  { href: '/memberships', label: 'Memberships' },
+  { href: '/team', label: 'Team' },
+  { href: '/private-events', label: 'Private Events' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__column site-footer__brand">
+      <img src="/images/logo.png" alt="Prana Wellness Club" width="140" height="46" class="site-footer__logo" />
+      <p class="site-footer__tagline">Move with intention. Rest with purpose.</p>
+    </div>
+
+    <div class="site-footer__column">
+      <span class="eyebrow site-footer__eyebrow">Explore</span>
+      <nav aria-label="Footer">
+        <ul class="site-footer__nav">
+          {footerNav.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-footer__column">
+      <span class="eyebrow site-footer__eyebrow">Visit</span>
+      <address class="site-footer__address">
+        1621 E 7th St<br />
+        Austin, TX 78702
+      </address>
+      <p class="site-footer__contact">
+        <a href="mailto:hello@pranawellness.love">hello@pranawellness.love</a>
+      </p>
+      <p class="site-footer__hours">Hours &mdash; coming soon</p>
+      <ul class="site-footer__socials" aria-label="Social media">
+        <li>
+          <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noreferrer noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://youtube.com" aria-label="YouTube" target="_blank" rel="noreferrer noopener">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.6C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <div class="site-footer__bottom-inner">
+      <p>&copy; 2026 Prana Wellness Club</p>
+      <ul class="site-footer__legal">
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+        <li><a href="/accessibility">Accessibility</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-deep-brown);
+    color: var(--color-warm-white);
+    margin-top: var(--space-5xl);
+  }
+
+  .site-footer__inner {
+    width: 100%;
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: var(--space-4xl) var(--space-lg) var(--space-3xl);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3xl);
+  }
+
+  @media (min-width: 768px) {
+    .site-footer__inner {
+      grid-template-columns: 1.3fr 1fr 1.2fr;
+      gap: var(--space-2xl);
+      padding: var(--space-5xl) var(--space-2xl) var(--space-3xl);
+    }
+  }
+
+  .site-footer__column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .site-footer__brand {
+    gap: var(--space-lg);
+  }
+
+  .site-footer__logo {
+    filter: invert(1) brightness(1.1);
+    width: auto;
+    height: 48px;
+    max-width: 160px;
+  }
+
+  .site-footer__tagline {
+    font-family: var(--font-display);
+    font-size: var(--size-body-lg);
+    color: var(--color-warm-white);
+    max-width: 22ch;
+    font-style: italic;
+    opacity: 0.9;
+  }
+
+  .site-footer__eyebrow {
+    color: var(--color-golden);
+    opacity: 0.75;
+    margin-bottom: var(--space-xs);
+  }
+
+  .site-footer__nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .site-footer__nav a,
+  .site-footer__address,
+  .site-footer__contact a,
+  .site-footer__hours {
+    font-family: var(--font-body);
+    font-size: var(--size-body-sm);
+    color: var(--color-warm-white);
+    opacity: 0.85;
+    font-style: normal;
+    line-height: 1.6;
+  }
+
+  .site-footer__nav a:hover,
+  .site-footer__contact a:hover {
+    color: var(--color-golden);
+    opacity: 1;
+  }
+
+  .site-footer__socials {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  .site-footer__socials a {
+    color: var(--color-warm-white);
+    opacity: 0.85;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+  }
+
+  .site-footer__socials a:hover {
+    color: var(--color-golden);
+    opacity: 1;
+  }
+
+  .site-footer__bottom {
+    border-top: 1px solid rgba(245, 239, 226, 0.12);
+  }
+
+  .site-footer__bottom-inner {
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: var(--space-lg) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: flex-start;
+    font-family: var(--font-body);
+    font-size: var(--size-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
+
+  @media (min-width: 768px) {
+    .site-footer__bottom-inner {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-lg) var(--space-2xl);
+    }
+  }
+
+  .site-footer__legal {
+    display: flex;
+    gap: var(--space-lg);
+  }
+
+  .site-footer__legal a:hover {
+    color: var(--color-golden);
+  }
+</style>
