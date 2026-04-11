@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "url": "https://www.pranawellness.love/space",
+    "title": "Prana Wellness Club | Austin, TX",
+    "description": "Prana is a modern yoga and Pilates studio in Austin, TX offering reformer Pilates, yoga, breathwork, and wellness classes. Book your class today.",
+    "canonical": null,
+    "og": {
+      "title": null,
+      "description": null,
+      "image": null,
+      "type": null,
+      "url": null,
+      "site_name": null
+    },
+    "twitter": {
+      "card": null,
+      "title": null,
+      "description": null,
+      "image": null
+    },
+    "schema": []
+  },
+  "markdown": "<!-- header-start -->\n\n![Prana](https://www.pranawellness.love/static/logo.png)\n\n<!-- nav: HOME BOOK MEMBERSHIPS PRIVATE EVENTS CLASSES THE SPACE BLOG -->\n\n<!-- header-end -->\n\n<!-- section: py-20.text-center -->\n\n# The Space\n\nDesigned for movement. Built for restoration. Made to inspire.\n\n<!-- section: w-full -->\n\n![](https://www.pranawellness.love/_next/static/media/wooden-reformers.a2583105.jpg)\n\n![](https://www.pranawellness.love/_next/static/media/chatting-at-bar.83fa3027.jpg)\n\n![](https://www.pranawellness.love/_next/static/media/mat-pilates-dim.b31a8327.jpg)\n\n![](https://www.pranawellness.love/_next/static/media/club-space.89464b79.jpg)\n\n![](https://www.pranawellness.love/_next/static/media/1-3.82e77912.jpg)\n\n![](https://www.pranawellness.love/_next/static/media/prana-yoga-class-temp.cbb7e16a.jpg)\n\n![](https://www.pranawellness.love/_next/static/media/merch-shot.1349cca6.jpg)\n\n![](https://www.pranawellness.love/_next/static/media/hugging.5dad631c.jpg)\n\n![](https://www.pranawellness.love/_next/static/media/passing-out-towels.c754400b.jpg)\n\n![](https://www.pranawellness.love/_next/static/media/overhead-stretch.e7f51556.jpg)\n\n![](https://www.pranawellness.love/_next/static/media/vibey-lamp.b292ee13.jpg)\n\n![](https://www.pranawellness.love/_next/static/media/pre-yoga-class.7ec39349.jpg)\n\n<!-- section: py-16.md:py-24 -->\n\n## A Studio Unlike Any Other\n\nWarm textures, natural light, and intentional design elements come together to create a space where you can move, recover, and connect. Every detail was chosen to enhance your experience — from premium reformers and heated yoga flooring to thoughtfully curated relaxation spaces.\n\n[VIEW SCHEDULE](https://www.pranawellness.love/book)\n\n<!-- section: px-6.sm:px-10 -->\n\n## Amenities & Spaces\n\n### Co-Ed Sauna\n\nWarm cedar, soft ambient lighting, and grounding heat for muscle recovery & relaxation.\n\n### Locker Rooms\n\nPremium showers, spa-grade products, towel service, and secure lockers.\n\n### Heated Yoga Studio\n\nA warm, light-filled sanctuary designed to support flow, restorative, & meditation.\n\n### Wooden Reformers\n\nCustom-crafted reformers built for smooth resistance & elegant movement.\n\n### Lounge & Elixir Bar\n\nMatcha, adaptogens, smoothies, & cozy space to unwind or connect.\n\n### Cold Plunge\n\nBuilt for contrast therapy — clarity, invigoration, & recovery.\n\n[BOOK A CLASS](https://www.pranawellness.love/book)\n\n<!-- footer-start -->\nPrana Wellness Club\n\n<!-- nav: Classes Memberships The Space Join the Team -->\n\n© 2026 Prana Wellness Club. All rights reserved.\n<!-- footer-end -->",
+  "images": [
+    {
+      "src": "https://www.pranawellness.love/static/logo.png",
+      "alt": "Prana",
+      "sections": [
+        "root",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 226,
+      "naturalHeight": 170
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/wooden-reformers.a2583105.jpg",
+      "alt": "",
+      "sections": [
+        "w-full",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 299,
+      "naturalHeight": 374
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/chatting-at-bar.83fa3027.jpg",
+      "alt": "",
+      "sections": [
+        "w-full",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 299,
+      "naturalHeight": 374
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/mat-pilates-dim.b31a8327.jpg",
+      "alt": "",
+      "sections": [
+        "w-full",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 299,
+      "naturalHeight": 239
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/club-space.89464b79.jpg",
+      "alt": "",
+      "sections": [
+        "w-full",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 299,
+      "naturalHeight": 374
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/1-3.82e77912.jpg",
+      "alt": "",
+      "sections": [
+        "w-full",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 299,
+      "naturalHeight": 324
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/prana-yoga-class-temp.cbb7e16a.jpg",
+      "alt": "",
+      "sections": [
+        "w-full",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 299,
+      "naturalHeight": 449
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/merch-shot.1349cca6.jpg",
+      "alt": "",
+      "sections": [
+        "w-full",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 299,
+      "naturalHeight": 374
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/hugging.5dad631c.jpg",
+      "alt": "",
+      "sections": [
+        "w-full",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 299,
+      "naturalHeight": 374
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/passing-out-towels.c754400b.jpg",
+      "alt": "",
+      "sections": [
+        "w-full",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 299,
+      "naturalHeight": 374
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/overhead-stretch.e7f51556.jpg",
+      "alt": "",
+      "sections": [
+        "w-full",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 299,
+      "naturalHeight": 294
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/vibey-lamp.b292ee13.jpg",
+      "alt": "",
+      "sections": [
+        "w-full",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 299,
+      "naturalHeight": 374
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/pre-yoga-class.7ec39349.jpg",
+      "alt": "",
+      "sections": [
+        "w-full",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 299,
+      "naturalHeight": 374
+    }
+  ],
+  "videos": [],
+  "iframes": [],
+  "bookingWidgetPresent": false
+}

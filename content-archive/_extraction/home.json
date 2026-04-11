@@ -1,0 +1,105 @@
+{
+  "meta": {
+    "url": "https://www.pranawellness.love/",
+    "title": "Prana Wellness Club | Austin, TX",
+    "description": "Prana is a modern yoga and Pilates studio in Austin, TX offering reformer Pilates, yoga, breathwork, and wellness classes. Book your class today.",
+    "canonical": null,
+    "og": {
+      "title": null,
+      "description": null,
+      "image": null,
+      "type": null,
+      "url": null,
+      "site_name": null
+    },
+    "twitter": {
+      "card": null,
+      "title": null,
+      "description": null,
+      "image": null
+    },
+    "schema": []
+  },
+  "markdown": "<!-- header-start -->\n\n![Prana](https://www.pranawellness.love/static/logo.png)\n\n<!-- nav: HOME BOOK MEMBERSHIPS PRIVATE EVENTS CLASSES THE SPACE BLOG -->\n\n<!-- header-end -->\n\n<!-- section: relative.h-screen -->\n\n<!-- video: https://www.pranawellness.love/static/hero-bg.mp4 -->\n\nPRANA WELLNESS CLUB\n\n# Move with intention. Rest with purpose.\n\n[BOOK A CLASS](https://www.pranawellness.love/book)\n\n[EXPLORE MEMBERSHIPS](https://www.pranawellness.love/memberships)\n\n<!-- section: relative -->\n\n<!-- section: relative.overflow-hidden -->\n\n![Studio atmosphere](https://www.pranawellness.love/_next/static/media/studio-ambient.a651b75d.jpg)✦\n\n## Your sanctuary for mindful movement\n\nCome home to your body. At Prana, we believe movement is medicine — a daily act of returning to yourself with intention, grace, and community.\n\n<!-- section: py-12.md:py-32 -->\n\n## What We Offer\n\n![Yoga](https://www.pranawellness.love/_next/static/media/yoga-card.6a5cf130.jpg)\n\n![Pilates](https://www.pranawellness.love/_next/static/media/pilates-card.86b40b86.jpg)\n\n[The Space A warm studio designed to feel like home from the moment you walk in. Enjoy our sauna, steam room and cold plunge LEARN MORE →](https://www.pranawellness.love/space)\n\n<!-- section: py-16.md:py-20 -->100+\n\nMEMBERS100+\n\nWEEKLY CLASSES5.0\n\nGOOGLE RATING (5.0★)\n\n<!-- section: py-12.md:py-20 -->\n\n## Our Story\n\n![Yoga practitioner in a deep backbend with dramatic warm lighting](https://www.pranawellness.love/_next/static/media/story-bg.fde8c79a.jpg)\n\nPrana was created from a simple but deeply felt need:\n\na place to land.\n\nWhat started with a desire to share holistic, fresh-ingredient smoothies became a gathering point for the east side of Austin. We added an outdoor cold plunge, hosted breathwork classes, and expanded our vision to the lot next door.\n\nNot a place to rush through or perform wellness, but a place to return to — again and again — where movement feels intentional and community feels genuine.\n\n\"We are here to support presence, not perfection. To offer a space that holds you — whether you come to move, to breathe, or simply to be.\"\n\nThis is Prana. A place to return to.\n\n<!-- section: relative.overflow-hidden -->\n\n![Membership background](https://www.pranawellness.love/_next/static/media/membership-bg.ca5207e3.jpg)\n\n## Your practice starts here\n\nJoin our founding members and experience unlimited classes, priority booking, and exclusive studio events.\n\n[BECOME A MEMBER](https://www.pranawellness.love/memberships)\n\n<!-- section: py-12.md:py-32 -->\n\n## Find Us\n\n### Address\n\n1621 East 7th street Austin Texas\n\n### Hours\n\nEveryday 6 AM - 9 PM\n\n### Parking\n\nParking available on site, at cafe next door, and street parking available\n\n### Email\n [Info@pranawellness.love](mailto:hello@pranawellness.love)\n\nStudio Location\n\n[View on Google Maps →](https://maps.google.com/)\n\n<!-- footer-start -->\nPrana Wellness Club\n\n<!-- nav: Classes Memberships The Space Join the Team -->\n\n© 2026 Prana Wellness Club. All rights reserved.\n<!-- footer-end -->",
+  "images": [
+    {
+      "src": "https://www.pranawellness.love/static/logo.png",
+      "alt": "Prana",
+      "sections": [
+        "root",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 226,
+      "naturalHeight": 170
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/studio-ambient.a651b75d.jpg",
+      "alt": "Studio atmosphere",
+      "sections": [
+        "relative.overflow-hidden",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 320,
+      "naturalHeight": 210
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/yoga-card.6a5cf130.jpg",
+      "alt": "Yoga",
+      "sections": [
+        "py-12.md:py-32",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 396,
+      "naturalHeight": 594
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/pilates-card.86b40b86.jpg",
+      "alt": "Pilates",
+      "sections": [
+        "py-12.md:py-32",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 396,
+      "naturalHeight": 528
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/story-bg.fde8c79a.jpg",
+      "alt": "Yoga practitioner in a deep backbend with dramatic warm lighting",
+      "sections": [
+        "py-12.md:py-20",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 600,
+      "naturalHeight": 799
+    },
+    {
+      "src": "https://www.pranawellness.love/_next/static/media/membership-bg.ca5207e3.jpg",
+      "alt": "Membership background",
+      "sections": [
+        "relative.overflow-hidden",
+        "fallback-sweep"
+      ],
+      "naturalWidth": 450,
+      "naturalHeight": 600
+    }
+  ],
+  "videos": [
+    {
+      "type": "file",
+      "sources": [
+        "https://www.pranawellness.love/static/hero-bg.mp4",
+        "https://www.pranawellness.love/static/hero-bg.mov"
+      ],
+      "poster": null
+    },
+    {
+      "type": "file",
+      "sources": [
+        "https://www.pranawellness.love/static/space-card.mp4"
+      ],
+      "poster": null
+    }
+  ],
+  "iframes": [],
+  "bookingWidgetPresent": false
+}
