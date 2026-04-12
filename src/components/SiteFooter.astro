@@ -20,7 +20,7 @@ const accessibilityHref = withBase('/accessibility');
 <footer class="site-footer">
   <div class="site-footer__inner">
     <div class="site-footer__column site-footer__brand">
-      <img src={logoSrc} alt="Prana Wellness Club" width="140" height="46" class="site-footer__logo" />
+      <img src={logoSrc} alt="Prana Wellness Club" width="726" height="545" class="site-footer__logo" />
       <p class="site-footer__tagline">Move with intention. Rest with purpose.</p>
     </div>
 
@@ -44,7 +44,7 @@ const accessibilityHref = withBase('/accessibility');
       <p class="site-footer__contact">
         <a href="mailto:hello@pranawellness.love">hello@pranawellness.love</a>
       </p>
-      <p class="site-footer__hours">Hours &mdash; coming soon</p>
+      <p class="site-footer__hours">Open daily · 7am–9pm</p>
       <ul class="site-footer__socials" aria-label="Social media">
         <li>
           <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noreferrer noopener">
@@ -115,10 +115,9 @@ const accessibilityHref = withBase('/accessibility');
   }
 
   .site-footer__logo {
-    filter: invert(1) brightness(1.1);
-    width: auto;
-    height: 48px;
-    max-width: 160px;
+    width: 140px;
+    height: auto;
+    display: block;
   }
 
   .site-footer__tagline {
@@ -214,7 +213,16 @@ const accessibilityHref = withBase('/accessibility');
     gap: var(--space-lg);
   }
 
-  .site-footer__legal a:hover {
+  .site-footer__legal a {
     color: var(--color-golden);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    transition: opacity var(--dur-fast) ease;
+  }
+
+  .site-footer__legal a:hover {
+    opacity: 1;
   }
 </style>

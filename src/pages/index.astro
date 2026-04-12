@@ -16,15 +16,19 @@ const heroVideoMp4 = withBase('/videos/home/hero-bg.mp4');
 const heroVideoMov = withBase('/videos/home/hero-bg.mov');
 const spaceVideoMp4 = withBase('/videos/home/space-card.mp4');
 const membershipImage = withBase('/images/home/membership.jpg');
+const storyImage = withBase('/images/home/story.jpg');
+const classHeatedVinyasaImg = withBase('/images/home/classes/heated-vinyasa.jpg');
+const classPilatesReformerImg = withBase('/images/home/classes/pilates-reformer.jpg');
+const classYinImg = withBase('/images/home/classes/yin.jpg');
 const bookHref = withBase('/book');
 const classesHref = withBase('/classes');
 const studioHref = withBase('/studio');
 const membershipsHref = withBase('/memberships');
 const contactHref = withBase('/contact');
 
-const mapQuery = encodeURIComponent('1621 E 7th St, Austin, TX 78702');
+const mapQuery = encodeURIComponent('Prana Wellness Club, 1621 E 7th St, Austin, TX 78702');
 const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
-const mapDirectionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
+const mapDirectionsHref = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('1621 E 7th St, Austin, TX 78702')}`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -44,10 +48,8 @@ const jsonLd = {
   },
   geo: {
     '@type': 'GeoCoordinates',
-    // TODO: confirm exact latitude/longitude for 1621 E 7th St, Austin, TX 78702.
-    // Values below are approximate based on the block's location in East Austin.
-    latitude: 30.2636,
-    longitude: -97.7223,
+    latitude: 30.2631319,
+    longitude: -97.7246735,
   },
   // TODO: add openingHoursSpecification once studio hours are supplied.
 };
@@ -90,6 +92,8 @@ const featuredClasses = [
       'A flowing, breath-led practice in a warm room. Builds strength, sweat, and stillness in equal measure.',
     meta: ['60 min', 'Heated 95°F'],
     href: withBase('/classes/heated-vinyasa'),
+    image: classHeatedVinyasaImg,
+    alt: 'A heated vinyasa class at Prana',
   },
   {
     category: 'Pilates',
@@ -98,6 +102,8 @@ const featuredClasses = [
       'Small-group Reformer work focused on posture, control, and long muscle tone. Great for first-timers and regulars.',
     meta: ['50 min', 'Neutral'],
     href: withBase('/classes/pilates-reformer'),
+    image: classPilatesReformerImg,
+    alt: 'Wooden reformers at Prana',
   },
   {
     category: 'Yin',
@@ -106,6 +112,8 @@ const featuredClasses = [
       'Long holds, deep breath, and quiet mats. A reset for anyone living in their shoulders or their phone.',
     meta: ['75 min', 'Warm 80°F'],
     href: withBase('/classes/yin'),
+    image: classYinImg,
+    alt: 'A student in a yin stretch on the mat',
   },
   {
     category: 'Strength',
@@ -114,6 +122,8 @@ const featuredClasses = [
       'Loaded strength work woven into a mobility practice. For when you want yoga to hit like a training session.',
     meta: ['55 min', 'Neutral'],
     href: withBase('/classes/strength-mobility-flow'),
+    image: null,
+    alt: null,
   },
 ];
 ---
@@ -122,7 +132,7 @@ const featuredClasses = [
   <script type="application/ld+json" slot="jsonld" set:html={JSON.stringify(jsonLd)} />
 
   <!-- SECTION 1 — HERO -->
-  <section class="hero" aria-labelledby="hero-headline">
+  <section class="hero" aria-labelledby="hero-headline" data-header-watch="hero">
     <div class="hero__media" style={`--hero-poster: url('${heroPoster}');`}>
       <video
         class="hero__video"
@@ -140,18 +150,16 @@ const featuredClasses = [
       <div class="hero__gradient" aria-hidden="true"></div>
     </div>
 
-    <div class="hero__content container">
+    <div class="hero__content">
       <span class="eyebrow hero__eyebrow">Austin · Est. 2024</span>
       <h1 id="hero-headline" class="hero__headline">
         Move with intention.<br />Rest with purpose.
       </h1>
       <p class="hero__support">A boutique Austin studio for Pilates, yoga, and recovery.</p>
-      <a href={bookHref} class="btn btn-primary-light hero__cta">Book a Class</a>
-    </div>
-
-    <div class="hero__scroll" aria-hidden="true">
-      <span class="eyebrow">Scroll</span>
-      <span class="hero__scroll-line"></span>
+      <div class="hero__actions">
+        <a href={bookHref} class="pill-primary hero__cta-primary">Book a Class</a>
+        <a href={membershipsHref} class="pill-ghost hero__cta-ghost">Memberships</a>
+      </div>
     </div>
   </section>
 
@@ -214,10 +222,12 @@ const featuredClasses = [
   <section class="story">
     <div class="story__grid">
       <div class="story__image">
-        <PlaceholderImage
-          ratio="4 / 5"
-          label="Founder portrait — to be supplied"
-          alt="Placeholder image for a portrait of the Prana Wellness Club founder"
+        <img
+          src={storyImage}
+          alt="Inside the Prana studio — warm wood, natural light, and plants"
+          width="840"
+          height="1050"
+          loading="lazy"
         />
       </div>
 
@@ -225,23 +235,22 @@ const featuredClasses = [
         <span class="eyebrow">Our story</span>
         <h2 class="story__headline">A place to come back to.</h2>
 
-        <blockquote class="story__quote">
-          "We wanted a room that felt like it exhaled when you walked in."
-        </blockquote>
-
-        <p class="story__lead">
+        <p class="story__body">
           Prana started as a small idea between friends who were tired of practicing in rooms
           that felt nothing like the practice. Today it's a full studio in South Austin where
           the reformers are wooden, the plants are real, and the people at the front desk
           actually remember your name.
         </p>
+
+        <blockquote class="story__quote">
+          "We wanted a room that felt like it exhaled when you walked in."
+        </blockquote>
+
         <p class="story__body">
           We think of ourselves less like a gym and more like a third place. Somewhere between
           your home and your work where the only agenda is to feel better than you did when you
           walked in.
         </p>
-
-        <a href={studioHref} class="link-ghost story__link">Read the full story <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -259,11 +268,21 @@ const featuredClasses = [
           <li class="class-card">
             <a href={c.href} class="class-card__link">
               <div class="class-card__image">
-                <PlaceholderImage
-                  ratio="3 / 2"
-                  label={`Class photo — ${c.title}`}
-                  alt={`Placeholder image for the ${c.title} class`}
-                />
+                {c.image ? (
+                  <img
+                    src={c.image}
+                    alt={c.alt}
+                    width="900"
+                    height="600"
+                    loading="lazy"
+                  />
+                ) : (
+                  <PlaceholderImage
+                    ratio="3 / 2"
+                    label={`Class photo — ${c.title}`}
+                    alt={`Placeholder image for the ${c.title} class`}
+                  />
+                )}
               </div>
               <div class="class-card__body">
                 <span class="eyebrow class-card__eyebrow">{c.category}</span>
@@ -356,7 +375,7 @@ const featuredClasses = [
           Austin, TX 78702
         </address>
 
-        <p class="find__hours">Hours &mdash; to be confirmed</p>
+        <p class="find__hours">Open daily · 7am–9pm</p>
 
         <p class="find__contact">
           Email: <a href="mailto:hello@pranawellness.love">hello@pranawellness.love</a>
@@ -385,10 +404,9 @@ const featuredClasses = [
   /* ==================== SECTION 1 — HERO ==================== */
   .hero {
     position: relative;
-    min-height: 88svh;
+    min-height: 100svh;
     display: flex;
     align-items: flex-end;
-    padding-bottom: var(--space-4xl);
     overflow: hidden;
     isolation: isolate;
   }
@@ -413,9 +431,10 @@ const featuredClasses = [
     inset: 0;
     background: linear-gradient(
       to top,
-      rgba(58, 42, 34, 0.72) 0%,
-      rgba(58, 42, 34, 0.4) 25%,
-      rgba(58, 42, 34, 0) 55%
+      rgba(58, 42, 34, 0.75) 0%,
+      rgba(58, 42, 34, 0.45) 35%,
+      rgba(58, 42, 34, 0.05) 70%,
+      transparent 100%
     );
   }
 
@@ -434,13 +453,22 @@ const featuredClasses = [
     position: relative;
     max-width: var(--content-max);
     width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--space-lg);
     padding-bottom: var(--space-2xl);
+  }
+
+  @media (min-width: 768px) {
+    .hero__content {
+      padding-inline: var(--space-2xl);
+      padding-bottom: var(--space-3xl);
+    }
   }
 
   .hero__eyebrow {
     color: var(--color-warm-white);
-    opacity: 0.9;
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xs);
+    display: inline-block;
   }
 
   .hero__headline {
@@ -458,50 +486,50 @@ const featuredClasses = [
     font-family: var(--font-body);
     font-size: var(--size-body-lg);
     color: var(--color-warm-white);
-    opacity: 0.85;
     max-width: 48ch;
     line-height: 1.5;
     margin-bottom: var(--space-xl);
   }
 
-  .hero__cta {
-    margin-top: var(--space-xs);
-  }
-
-  .hero__scroll {
-    position: absolute;
-    bottom: var(--space-lg);
-    left: 50%;
-    transform: translateX(-50%);
+  .hero__actions {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: var(--space-sm);
+    max-width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .hero__actions {
+      flex-direction: row;
+      gap: var(--space-md);
+    }
+  }
+
+  .hero__cta-primary,
+  .hero__cta-ghost {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+
+  .hero__cta-ghost {
+    background: transparent;
+    border: 1px solid var(--color-warm-white);
     color: var(--color-warm-white);
-    opacity: 0.75;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
-  .hero__scroll .eyebrow {
-    color: var(--color-warm-white);
+  .hero__cta-ghost:hover,
+  .hero__cta-ghost:focus-visible {
+    background: var(--color-warm-white);
+    color: var(--color-deep-brown);
   }
 
-  .hero__scroll-line {
-    display: block;
-    width: 1px;
-    height: 48px;
-    background-color: var(--color-warm-white);
-    opacity: 0.6;
-    animation: scrollBob 2.4s var(--ease-out) infinite;
-    transform-origin: top;
-  }
-
-  @keyframes scrollBob {
-    0%, 100% { transform: translateY(0) scaleY(1); opacity: 0.6; }
-    50% { transform: translateY(6px) scaleY(0.88); opacity: 0.3; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero__scroll-line { animation: none; }
+  @media (max-width: 639px) {
+    .hero__cta-primary,
+    .hero__cta-ghost {
+      width: 100%;
+    }
   }
 
   /* ==================== SECTION 2 — WELCOME ==================== */
@@ -543,7 +571,7 @@ const featuredClasses = [
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
-    text-align: left;
+    text-align: center;
     max-width: var(--content-narrow);
     margin-inline: auto;
   }
@@ -693,11 +721,23 @@ const featuredClasses = [
 
   .story__image {
     width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-placeholder);
+  }
+
+  .story__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   @media (min-width: 1024px) {
     .story__image {
-      grid-column: 1 / span 5;
+      grid-column: 1 / span 4;
+      max-width: 420px;
       margin-top: var(--space-3xl);
     }
   }
@@ -706,16 +746,22 @@ const featuredClasses = [
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
+    max-width: 600px;
   }
 
   @media (min-width: 1024px) {
     .story__copy {
-      grid-column: 7 / span 5;
+      grid-column: 6 / span 6;
     }
   }
 
   .story__copy .eyebrow {
     color: var(--color-terracotta);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
   }
 
   .story__headline {
@@ -727,36 +773,26 @@ const featuredClasses = [
     max-width: 15ch;
   }
 
+  .story__body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: var(--size-body);
+    line-height: var(--line-body);
+    color: var(--color-espresso);
+    max-width: 56ch;
+  }
+
   .story__quote {
     font-family: var(--font-display);
     font-size: var(--size-h3);
     font-weight: 400;
+    font-style: italic;
     line-height: var(--line-snug);
     color: var(--color-terracotta);
-    max-width: 18ch;
+    max-width: 22ch;
     border-top: 1px solid var(--color-hairline);
     padding-top: var(--space-sm);
-    margin: var(--space-md) 0;
-    font-style: italic;
-  }
-
-  .story__lead {
-    font-size: var(--size-body-lg);
-    line-height: var(--line-body);
-    color: var(--color-espresso);
-    max-width: 44ch;
-  }
-
-  .story__body {
-    font-size: var(--size-body);
-    line-height: var(--line-body);
-    color: var(--color-espresso);
-    max-width: 44ch;
-  }
-
-  .story__link {
-    align-self: flex-start;
-    margin-top: var(--space-md);
+    margin: var(--space-sm) 0;
   }
 
   /* ==================== SECTION 5 — FEATURED CLASSES ==================== */
@@ -820,8 +856,24 @@ const featuredClasses = [
 
   .class-card__image {
     width: 100%;
+    aspect-ratio: 3 / 2;
     overflow: hidden;
     border-radius: var(--radius-sm);
+    background-color: var(--color-placeholder);
+  }
+
+  .class-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: filter var(--dur-slow) var(--ease-out);
+    filter: brightness(0.98);
+  }
+
+  .class-card__link:hover .class-card__image img,
+  .class-card__link:focus-visible .class-card__image img {
+    filter: brightness(1.03);
   }
 
   .class-card__body {
@@ -855,6 +907,11 @@ const featuredClasses = [
     line-height: var(--line-body);
     color: var(--color-espresso);
     margin-top: var(--space-xs);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .class-card__meta {
@@ -900,7 +957,7 @@ const featuredClasses = [
     align-items: flex-end;
     overflow: hidden;
     isolation: isolate;
-    background-color: var(--color-deep-brown);
+    background-color: transparent;
   }
 
   @media (min-width: 1024px) {
@@ -926,9 +983,10 @@ const featuredClasses = [
     inset: 0;
     background: linear-gradient(
       to top,
-      rgba(58, 42, 34, 0.75) 0%,
-      rgba(58, 42, 34, 0.35) 35%,
-      rgba(58, 42, 34, 0) 60%
+      rgba(58, 42, 34, 0.85) 0%,
+      rgba(58, 42, 34, 0.55) 25%,
+      rgba(58, 42, 34, 0.15) 55%,
+      transparent 80%
     );
   }
 
