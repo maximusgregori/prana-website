@@ -238,9 +238,14 @@ const jsonLd = {
           href="https://www.instagram.com/pranawellnessclub/"
           target="_blank"
           rel="noreferrer noopener"
-          class="link-arrow"
+          class="btn btn-ghost"
         >
-          Follow us on Instagram <span aria-hidden="true">→</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <circle cx="12" cy="12" r="5" />
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" />
+          </svg>
+          Follow us on Instagram
         </a>
       </div>
     </div>
@@ -340,8 +345,11 @@ const jsonLd = {
 
       milestones.forEach((ms, i) => {
         if (!dots[i]) return;
-        const msRect = ms.getBoundingClientRect();
-        const dotTop = msRect.top - bodyRect.top;
+        // Align dot with the milestone title, not the year eyebrow
+        const title = ms.querySelector('.timeline__milestone-title');
+        const anchor = title || ms;
+        const anchorRect = anchor.getBoundingClientRect();
+        const dotTop = anchorRect.top - bodyRect.top + 4;
         dots[i].style.left = `${svgCenterX - 8}px`;
         dots[i].style.top = `${dotTop}px`;
       });
@@ -351,7 +359,7 @@ const jsonLd = {
     window.addEventListener('resize', positionDots);
 
     // Safari fallback: no support for animation-timeline: scroll()
-    const supportsScrollTimeline = CSS.supports('animation-timeline', 'scroll()');
+    const supportsScrollTimeline = CSS.supports('animation-timeline', 'view()');
     if (!supportsScrollTimeline) {
       const section = body;
       if (!section) return;
@@ -405,7 +413,7 @@ const jsonLd = {
   .studio-hero__gradient {
     position: absolute;
     inset: 0;
-    background: rgba(58, 42, 34, 0.32);
+    background: rgba(58, 42, 34, 0.55);
   }
 
   .studio-hero__content {
@@ -536,12 +544,12 @@ const jsonLd = {
     }
   }
 
-  /* Scroll-draw animation (Chrome, Firefox) */
+  /* Scroll-draw animation (Chrome, Firefox, Safari 18+) */
   .timeline__path {
     stroke-dasharray: var(--path-length);
     stroke-dashoffset: var(--path-length);
     animation: draw-path linear forwards;
-    animation-timeline: scroll(nearest block);
+    animation-timeline: view();
     animation-range: entry 20% exit 80%;
   }
 
@@ -552,7 +560,7 @@ const jsonLd = {
   }
 
   /* Safari fallback: animate on visibility */
-  @supports not (animation-timeline: scroll()) {
+  @supports not (animation-timeline: view()) {
     .timeline__path {
       animation: none;
       transition: stroke-dashoffset 2.5s ease-out;
