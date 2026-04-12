@@ -1,0 +1,152 @@
+---
+import { withBase } from '../lib/paths';
+
+interface Props {
+  bg?: 'cream' | 'warm-white';
+}
+
+const { bg = 'warm-white' } = Astro.props;
+
+const contactHref = withBase('/contact');
+
+const mapQuery = encodeURIComponent('Prana Wellness Club, 1621 E 7th St, Austin, TX 78702');
+const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+const mapDirectionsHref = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('1621 E 7th St, Austin, TX 78702')}`;
+
+const bgColor = bg === 'cream' ? 'var(--color-cream)' : 'var(--color-warm-white)';
+---
+
+<section class="find" style={`--find-bg: ${bgColor}`}>
+  <div class="find__grid">
+    <div class="find__info">
+      <span class="eyebrow">Find us</span>
+      <h2 class="find__headline">East Austin, on 7th.</h2>
+
+      <address class="find__address">
+        1621 E 7th St<br />
+        Austin, TX 78702
+      </address>
+
+      <p class="find__hours">Open daily · 7am–9pm</p>
+
+      <p class="find__contact">
+        Email: <a href="mailto:hello@pranawellness.love">hello@pranawellness.love</a>
+      </p>
+
+      <div class="find__actions">
+        <a href={mapDirectionsHref} target="_blank" rel="noreferrer noopener" class="btn btn-primary">Get directions</a>
+        <a href={contactHref} class="btn btn-ghost">Questions? Contact us →</a>
+      </div>
+    </div>
+
+    <div class="find__map-wrap">
+      <iframe
+        class="find__map"
+        src={mapEmbedSrc}
+        title="Map of Prana Wellness Club at 1621 E 7th St, Austin, TX"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<style>
+  .find {
+    background-color: var(--find-bg);
+    padding: var(--space-4xl) var(--space-lg);
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  @media (min-width: 1024px) {
+    .find { padding: var(--space-5xl) var(--space-2xl); }
+  }
+
+  .find__grid {
+    max-width: var(--content-max);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+
+  @media (min-width: 1024px) {
+    .find__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4xl);
+    }
+  }
+
+  .find__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .find__info .eyebrow {
+    color: var(--color-terracotta);
+  }
+
+  .find__headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--size-h2);
+    line-height: var(--line-tight);
+    color: var(--color-deep-brown);
+    margin-bottom: var(--space-sm);
+  }
+
+  .find__address {
+    font-family: var(--font-body);
+    font-size: var(--size-body-lg);
+    font-style: normal;
+    color: var(--color-espresso);
+    line-height: var(--line-body);
+  }
+
+  .find__hours,
+  .find__contact {
+    font-size: var(--size-body);
+    color: var(--color-espresso);
+  }
+
+  .find__contact a:hover {
+    color: var(--color-terracotta);
+    border-bottom: 1px solid var(--color-terracotta);
+  }
+
+  .find__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+
+  @media (min-width: 640px) {
+    .find__actions {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .find__map-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  @media (min-width: 1024px) {
+    .find__map-wrap { aspect-ratio: 4 / 5; }
+  }
+
+  .find__map {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+</style>

@@ -1,29 +1,819 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FindUs from '../components/FindUs.astro';
+import { withBase } from '../lib/paths';
+
+const title = 'The Studio | Prana Wellness Club';
+const description =
+  'Step inside Prana Wellness Club in East Austin. Wooden reformers, heated yoga floors, infrared sauna, cold plunge, and a lounge worth lingering in.';
+
+const site = Astro.site ?? new URL('https://constanceit.github.io/');
+const canonical = new URL(Astro.url.pathname, site).toString();
+const ogImage = new URL(withBase('/images/og/studio.jpg'), site).toString();
+
+const heroImage = withBase('/images/studio/hero.jpg');
+const storyImage = withBase('/images/studio/story.jpg');
+const membershipImage = withBase('/images/studio/membership.jpg');
+
+const classesHref = withBase('/classes');
+const membershipsHref = withBase('/memberships');
+const bookHref = withBase('/book');
+
+const galleryImages = [
+  {
+    src: withBase('/images/studio/gallery/reformers.jpg'),
+    alt: 'Rows of custom wooden Pilates reformers at Prana Wellness Club',
+    width: 1400,
+    height: 1750,
+  },
+  {
+    src: withBase('/images/studio/gallery/yoga-room.jpg'),
+    alt: 'The heated yoga studio at Prana with warm lighting and laid-out mats',
+    width: 1200,
+    height: 1800,
+  },
+  {
+    src: withBase('/images/studio/gallery/lounge.jpg'),
+    alt: 'Members chatting at the lounge and elixir bar after class',
+    width: 1400,
+    height: 1750,
+  },
+  {
+    src: withBase('/images/studio/gallery/details.jpg'),
+    alt: 'Warm lighting and natural textures inside the Prana studio',
+    width: 1200,
+    height: 1500,
+  },
+  {
+    src: withBase('/images/studio/gallery/community.jpg'),
+    alt: 'Two members hugging after a class at Prana',
+    width: 1200,
+    height: 1500,
+  },
+  {
+    src: withBase('/images/studio/gallery/stretch.jpg'),
+    alt: 'Overhead view of a yoga stretch on the mat',
+    width: 768,
+    height: 755,
+  },
+];
+
+const amenities = [
+  {
+    eyebrow: 'YOGA',
+    title: 'Warm floors. Good light. A room that breathes.',
+    body: 'The yoga studio seats eighteen and runs warm year-round with radiant heated flooring. Morning light comes in through east-facing windows. The ceiling is high enough to feel open without feeling cavernous. We run heated vinyasa, hatha, yin, restorative, and a Friday night flow that people tend to stay for long after the last savasana.',
+    link: { label: 'See the class schedule', href: classesHref },
+    image: {
+      src: withBase('/images/studio/amenities/yoga-studio.jpg'),
+      alt: 'Members stretching before a heated yoga class at Prana',
+      width: 1200,
+      height: 900,
+    },
+  },
+  {
+    eyebrow: 'PILATES',
+    title: 'Wooden reformers. Small groups. Real adjustments.',
+    body: 'Twelve custom-built wooden reformers from a small shop in Oregon. They\'re beautiful to look at and smooth to work on. Classes cap at twelve so your instructor can actually see you, correct your form, and remember where you left off last time. We run Reformer, Reformer Sculpt, and a mat class for people who like their Pilates stripped down.',
+    link: { label: 'See the class schedule', href: classesHref },
+    image: {
+      src: withBase('/images/studio/amenities/reformer-studio.jpg'),
+      alt: 'Custom wooden Pilates reformers at Prana Wellness Club',
+      width: 1200,
+      height: 900,
+    },
+  },
+  {
+    eyebrow: 'RECOVERY',
+    title: 'Cedar walls and dry heat.',
+    body: 'A co-ed infrared sauna built into the recovery wing. Cedar-lined, seats six, runs between 130 and 150 degrees. Most members use it after class as a cool-down, but some come just for the sauna. It\'s a slower, deeper heat than traditional steam, and it\'s included with every membership.',
+    link: { label: 'Learn about memberships', href: membershipsHref },
+    image: {
+      src: withBase('/images/studio/amenities/sauna.jpg'),
+      alt: 'Cedar-lined infrared sauna at Prana with stone heater',
+      width: 765,
+      height: 573,
+    },
+  },
+  {
+    eyebrow: 'RECOVERY',
+    title: 'Forty degrees. Two minutes. You\'ll feel it all day.',
+    body: 'The cold plunge sits across from the sauna for easy contrast therapy. Water stays between 39 and 45 degrees. Most people start with 60 seconds and work up from there. It\'s the part of the studio people are most nervous about and most glad they tried.',
+    link: { label: 'Learn about memberships', href: membershipsHref },
+    image: {
+      src: withBase('/images/studio/amenities/cold-plunge.jpg'),
+      alt: 'Cold plunge pool at Prana Wellness Club',
+      width: 765,
+      height: 573,
+    },
+  },
+  {
+    eyebrow: 'AMENITIES',
+    title: 'Showers, products, towels. Show up with just your clothes.',
+    body: 'Full locker rooms with walk-in showers, spa-grade shampoo and body wash, fresh towels, and secure day lockers. We keep hair dryers, deodorant, and a few other things stocked so you can go straight from class to wherever you\'re headed next.',
+    link: null,
+    image: {
+      src: withBase('/images/studio/amenities/locker-rooms.jpg'),
+      alt: 'Locker room with showers, towels, and moss wall at Prana',
+      width: 765,
+      height: 573,
+    },
+  },
+  {
+    eyebrow: 'COMMUNITY',
+    title: 'Stay a while.',
+    body: 'The lounge is the part of the studio that surprises people. A handful of tables, a counter with stools, and an elixir bar serving matcha, smoothies, adaptogens, and a rotating seasonal menu. It\'s where people end up after class, talking longer than they planned. We built it because the best studios we\'ve been to always had a reason to linger.',
+    link: null,
+    image: {
+      src: withBase('/images/studio/amenities/lounge.jpg'),
+      alt: 'Members chatting at the lounge and elixir bar after class',
+      width: 1200,
+      height: 900,
+    },
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HealthClub',
+  name: 'Prana Wellness Club',
+  url: canonical,
+  image: ogImage,
+  email: 'hello@pranawellness.love',
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '1621 E 7th St',
+    addressLocality: 'Austin',
+    addressRegion: 'TX',
+    postalCode: '78702',
+    addressCountry: 'US',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 30.2631319,
+    longitude: -97.7246735,
+  },
+  // TODO: add openingHoursSpecification once studio hours are supplied.
+};
 ---
 
-<BaseLayout
-  title="The Studio | Prana Wellness Club"
-  description="Tour the Prana Wellness Club studio in East Austin. Page coming soon."
->
-  <section class="stub">
-    <div class="container">
-      <span class="eyebrow">The Studio</span>
-      <h1>Coming soon</h1>
+<BaseLayout title={title} description={description} ogImage="/images/og/studio.jpg" canonical={canonical}>
+  <script type="application/ld+json" slot="jsonld" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- SECTION 1 — HERO -->
+  <section class="studio-hero" aria-labelledby="studio-headline" data-header-watch="hero">
+    <div class="studio-hero__media">
+      <img
+        src={heroImage}
+        alt="Inside the Prana Wellness Club reformer studio"
+        width="765"
+        height="430"
+        fetchpriority="high"
+        class="studio-hero__image"
+      />
+      <div class="studio-hero__gradient" aria-hidden="true"></div>
+    </div>
+
+    <div class="studio-hero__content">
+      <span class="eyebrow studio-hero__eyebrow">East Austin · Est. 2024</span>
+      <h1 id="studio-headline" class="studio-hero__headline">Step inside.</h1>
+      <p class="studio-hero__support">A studio built to feel as good as the practice.</p>
+      <a href={bookHref} class="btn btn-primary studio-hero__cta">Book a Class</a>
     </div>
   </section>
+
+  <!-- SECTION 2 — THE STORY -->
+  <section class="studio-story">
+    <div class="studio-story__grid">
+      <div class="studio-story__copy">
+        <span class="eyebrow">Our story</span>
+        <h2 class="studio-story__headline">We built the room we wished existed.</h2>
+
+        <p class="studio-story__body">
+          Prana started as a conversation between friends who kept driving across Austin to find a studio that didn't feel like a franchise. The lighting was always wrong, or the equipment was tired, or the vibe was more "corporate wellness" than actual wellness. We wanted warm wood, real plants, good light, and teachers who stuck around long enough to learn your name.
+        </p>
+
+        <p class="studio-story__body">
+          So we built it. A 4,000-square-foot studio on East 7th, from the ground up. Custom wooden reformers from a shop in Oregon. Heated floors in the yoga room. An infrared sauna because dry heat is non-negotiable. A cold plunge because someone on the team wouldn't shut up about it until we added one.
+        </p>
+
+        <blockquote class="studio-story__quote">
+          "We wanted a room that felt like it exhaled when you walked in."
+        </blockquote>
+
+        <p class="studio-story__body">
+          Today Prana is a full studio with more than twenty classes a week across Pilates, yoga, and strength. But the original idea hasn't changed. We still think a studio should feel like a place you want to be in, not just a room you sweat in.
+        </p>
+      </div>
+
+      <div class="studio-story__image">
+        <img
+          src={storyImage}
+          alt="A member practicing on a wooden reformer at Prana, with arched alcoves in the background"
+          width="816"
+          height="1020"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 — VISUAL TOUR -->
+  <section class="gallery">
+    <div class="container">
+      <div class="gallery__header">
+        <span class="eyebrow">The space</span>
+        <h2 class="gallery__headline">See for yourself.</h2>
+      </div>
+
+      <div class="gallery__grid">
+        {galleryImages.map((img) => (
+          <div class="gallery__item">
+            <div class="gallery__img-wrap">
+              <img
+                src={img.src}
+                alt={img.alt}
+                width={img.width}
+                height={img.height}
+                loading="lazy"
+                class="gallery__img"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 — AMENITIES -->
+  <section class="amenities">
+    <div class="container">
+      <div class="amenities__header">
+        <span class="eyebrow">Amenities</span>
+        <h2 class="amenities__headline">Everything under one roof.</h2>
+        <p class="amenities__intro">Prana isn't just a place to take a class. It's a full studio with recovery, community, and a reason to stay longer than you planned.</p>
+      </div>
+
+      <div class="amenities__list">
+        {amenities.map((item, i) => (
+          <div class={`amenity ${i % 2 !== 0 ? 'amenity--reversed' : ''}`}>
+            <div class="amenity__image-wrap">
+              <img
+                src={item.image.src}
+                alt={item.image.alt}
+                width={item.image.width}
+                height={item.image.height}
+                loading="lazy"
+                class="amenity__image"
+              />
+            </div>
+            <div class="amenity__copy">
+              <span class="eyebrow amenity__eyebrow">{item.eyebrow}</span>
+              <h3 class="amenity__title">{item.title}</h3>
+              <p class="amenity__body">{item.body}</p>
+              {item.link && (
+                <a href={item.link.href} class="link-arrow">
+                  {item.link.label} <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 — MEMBERSHIP CTA -->
+  <section class="studio-membership">
+    <div class="studio-membership__grid">
+      <div class="studio-membership__copy">
+        <span class="eyebrow">Membership</span>
+        <h2 class="studio-membership__headline">One membership. The whole space.</h2>
+        <p class="studio-membership__body">
+          Unlimited classes, full access to the sauna, cold plunge, and lounge, and first priority on workshops and events. No contracts, no long commitments. Cancel any time.
+        </p>
+        <span class="eyebrow studio-membership__founding">Now accepting founding members</span>
+        <div class="studio-membership__actions">
+          <a href={membershipsHref} class="btn btn-primary">See membership options</a>
+          <a href={bookHref} class="btn btn-ghost">Or book a single class →</a>
+        </div>
+      </div>
+
+      <div class="studio-membership__image-wrap">
+        <img
+          src={membershipImage}
+          alt="The Prana lounge with slatted wood ceiling and warm lighting"
+          width="765"
+          height="956"
+          loading="lazy"
+          class="studio-membership__image"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 — FIND US -->
+  <FindUs bg="cream" />
 </BaseLayout>
 
 <style>
-  .stub {
-    padding: var(--space-5xl) 0;
-    min-height: 60svh;
-    display: flex;
-    align-items: center;
+  /* ==================== SECTION 1 — HERO ==================== */
+  .studio-hero {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
   }
-  .stub .eyebrow {
+
+  .studio-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--color-deep-brown);
+  }
+
+  .studio-hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .studio-hero__gradient {
+    position: absolute;
+    inset: 0;
+    background: rgba(58, 42, 34, 0.45);
+  }
+
+  .studio-hero__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: var(--content-max);
+    padding-inline: var(--space-2xl);
+  }
+
+  .studio-hero__eyebrow {
+    color: var(--color-warm-white);
+    margin-bottom: var(--space-xs);
+    display: inline-block;
+  }
+
+  .studio-hero__headline {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: var(--size-h1);
+    line-height: var(--line-tight);
+    color: var(--color-warm-white);
+    margin-bottom: var(--space-lg);
+    text-wrap: balance;
+  }
+
+  .studio-hero__support {
+    font-family: var(--font-body);
+    font-size: var(--size-body-lg);
+    color: var(--color-warm-white);
+    max-width: 48ch;
+    line-height: 1.5;
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+
+  @media (max-width: 639px) {
+    .studio-hero__cta {
+      width: 100%;
+      max-width: 360px;
+    }
+  }
+
+  /* ==================== SECTION 2 — THE STORY ==================== */
+  .studio-story {
+    background-color: var(--color-warm-white);
+    padding: var(--space-4xl) var(--space-lg);
+  }
+
+  @media (min-width: 1024px) {
+    .studio-story { padding: var(--space-6xl) var(--space-2xl); }
+  }
+
+  .studio-story__grid {
+    max-width: var(--content-max);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  @media (min-width: 1024px) {
+    .studio-story__grid {
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+  }
+
+  .studio-story__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    max-width: 600px;
+  }
+
+  @media (min-width: 1024px) {
+    .studio-story__copy {
+      grid-column: 6 / span 6;
+      grid-row: 1;
+    }
+  }
+
+  .studio-story__copy .eyebrow {
+    color: var(--color-terracotta);
+  }
+
+  .studio-story__headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--size-h2);
+    line-height: var(--line-tight);
+    color: var(--color-deep-brown);
+    max-width: 18ch;
+  }
+
+  .studio-story__body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: var(--size-body);
+    line-height: var(--line-body);
+    color: var(--color-espresso);
+    max-width: 56ch;
+  }
+
+  .studio-story__quote {
+    font-family: var(--font-display);
+    font-size: var(--size-h3);
+    font-weight: 400;
+    font-style: italic;
+    line-height: var(--line-snug);
+    color: var(--color-terracotta);
+    max-width: 22ch;
+    margin-block: var(--space-xl);
+  }
+
+  .studio-story__image {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-placeholder);
+    order: 1;
+  }
+
+  .studio-story__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
+  }
+
+  @media (min-width: 1024px) {
+    .studio-story__image {
+      grid-column: 1 / span 4;
+      grid-row: 1;
+      max-width: 420px;
+      margin-top: var(--space-3xl);
+      order: unset;
+    }
+  }
+
+  /* ==================== SECTION 3 — VISUAL TOUR ==================== */
+  .gallery {
+    background-color: var(--color-cream);
+    padding: var(--space-4xl) 0;
+  }
+
+  @media (min-width: 1024px) {
+    .gallery { padding: var(--space-5xl) 0; }
+  }
+
+  .gallery__header {
+    margin-bottom: var(--space-3xl);
+    max-width: 36ch;
+  }
+
+  .gallery__header .eyebrow {
     color: var(--color-terracotta);
     margin-bottom: var(--space-md);
+  }
+
+  .gallery__headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--size-h2);
+    line-height: var(--line-tight);
+    color: var(--color-deep-brown);
+  }
+
+  .gallery__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .gallery__img-wrap {
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-placeholder);
+  }
+
+  .gallery__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+
+  .gallery__img-wrap:hover .gallery__img {
+    transform: scale(1.02);
+  }
+
+  @media (min-width: 768px) {
+    .gallery__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    .gallery__item:nth-child(odd) .gallery__img-wrap {
+      aspect-ratio: 4 / 3;
+    }
+
+    .gallery__item:nth-child(even) .gallery__img-wrap {
+      aspect-ratio: 3 / 4;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .gallery__grid {
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--space-lg);
+    }
+
+    /* Row 1 */
+    .gallery__item:nth-child(1) { grid-column: 1 / 8; }
+    .gallery__item:nth-child(1) .gallery__img-wrap { aspect-ratio: 16 / 11; }
+
+    .gallery__item:nth-child(2) { grid-column: 8 / 13; }
+    .gallery__item:nth-child(2) .gallery__img-wrap { aspect-ratio: 4 / 5; }
+
+    /* Row 2 */
+    .gallery__item:nth-child(3) { grid-column: 1 / 5; }
+    .gallery__item:nth-child(3) .gallery__img-wrap { aspect-ratio: 1 / 1; }
+
+    .gallery__item:nth-child(4) { grid-column: 5 / 13; }
+    .gallery__item:nth-child(4) .gallery__img-wrap { aspect-ratio: 16 / 10; }
+
+    /* Row 3 */
+    .gallery__item:nth-child(5) { grid-column: 1 / 6; }
+    .gallery__item:nth-child(5) .gallery__img-wrap { aspect-ratio: 4 / 5; }
+
+    .gallery__item:nth-child(6) { grid-column: 6 / 13; }
+    .gallery__item:nth-child(6) .gallery__img-wrap { aspect-ratio: 3 / 2; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery__img {
+      transition: none;
+    }
+  }
+
+  /* ==================== SECTION 4 — AMENITIES ==================== */
+  .amenities {
+    background-color: var(--color-cream);
+    padding: var(--space-4xl) 0;
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  @media (min-width: 1024px) {
+    .amenities { padding: var(--space-5xl) 0; }
+  }
+
+  .amenities__header {
+    margin-bottom: var(--space-3xl);
+    max-width: 42ch;
+  }
+
+  .amenities__header .eyebrow {
+    color: var(--color-terracotta);
+    margin-bottom: var(--space-md);
+  }
+
+  .amenities__headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--size-h2);
+    line-height: var(--line-tight);
+    color: var(--color-deep-brown);
+    margin-bottom: var(--space-lg);
+  }
+
+  .amenities__intro {
+    font-size: var(--size-body);
+    line-height: var(--line-body);
+    color: var(--color-espresso);
+    max-width: 52ch;
+  }
+
+  .amenities__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+  }
+
+  .amenity {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .amenity {
+      flex-direction: row;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+
+    .amenity--reversed {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .amenity__image-wrap {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background-color: var(--color-placeholder);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 768px) {
+    .amenity__image-wrap {
+      width: 40%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .amenity__image-wrap {
+      width: 45%;
+    }
+  }
+
+  .amenity__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .amenity__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  @media (min-width: 768px) {
+    .amenity__copy {
+      flex: 1;
+    }
+  }
+
+  .amenity__eyebrow {
+    color: var(--color-terracotta);
+  }
+
+  .amenity__title {
+    font-family: var(--font-display);
+    font-size: var(--size-h3);
+    font-weight: 500;
+    color: var(--color-deep-brown);
+    line-height: var(--line-snug);
+    margin-top: var(--space-xs);
+  }
+
+  .amenity__body {
+    font-size: var(--size-body);
+    line-height: var(--line-body);
+    color: var(--color-espresso);
+    max-width: 52ch;
+    margin-top: var(--space-xs);
+  }
+
+  .amenity .link-arrow {
+    margin-top: var(--space-md);
+    align-self: flex-start;
+  }
+
+  /* ==================== SECTION 5 — MEMBERSHIP CTA ==================== */
+  .studio-membership {
+    background-color: var(--color-warm-white);
+    padding: var(--space-4xl) var(--space-lg);
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  @media (min-width: 1024px) {
+    .studio-membership { padding: var(--space-5xl) var(--space-2xl); }
+  }
+
+  .studio-membership__grid {
+    max-width: var(--content-max);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .studio-membership__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4xl);
+    }
+  }
+
+  .studio-membership__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: var(--content-narrow);
+  }
+
+  .studio-membership__copy .eyebrow {
+    color: var(--color-terracotta);
+  }
+
+  .studio-membership__headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--size-h2);
+    line-height: var(--line-tight);
+    color: var(--color-deep-brown);
+    margin-bottom: var(--space-xs);
+  }
+
+  .studio-membership__body {
+    font-size: var(--size-body);
+    line-height: var(--line-body);
+    color: var(--color-espresso);
+  }
+
+  .studio-membership__founding {
+    color: var(--color-terracotta);
+    margin-top: var(--space-sm);
+  }
+
+  .studio-membership__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    margin-top: var(--space-md);
+  }
+
+  @media (min-width: 640px) {
+    .studio-membership__actions {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .studio-membership__image-wrap {
+    order: -1;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-placeholder);
+  }
+
+  @media (min-width: 1024px) {
+    .studio-membership__image-wrap {
+      order: 2;
+      aspect-ratio: 4 / 5;
+    }
+  }
+
+  .studio-membership__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 </style>
