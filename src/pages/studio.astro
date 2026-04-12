@@ -155,7 +155,7 @@ const jsonLd = {
     </div>
   </section>
 
-  <!-- SECTION 2 — OUR STORY (animated SVG timeline) -->
+  <!-- SECTION 2 — OUR STORY (CSS timeline) -->
   <section class="timeline" aria-labelledby="timeline-headline">
     <div class="container">
       <div class="timeline__header">
@@ -165,23 +165,8 @@ const jsonLd = {
     </div>
 
     <div class="timeline__body">
-      <svg class="timeline__svg" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 200 1000">
-        <path
-          class="timeline__path"
-          d="M100,0 C40,80 160,160 100,250 C40,340 160,420 100,500 C40,580 160,660 100,750 C40,840 160,920 100,1000"
-          fill="none"
-          stroke="var(--color-terracotta)"
-          stroke-opacity="0.35"
-          stroke-width="2"
-        />
-      </svg>
-
-      <!-- Dots positioned by JS to align with milestones -->
-      <div class="timeline__dot" aria-hidden="true"><span class="timeline__dot-outer"></span><span class="timeline__dot-inner"></span></div>
-      <div class="timeline__dot" aria-hidden="true"><span class="timeline__dot-outer"></span><span class="timeline__dot-inner"></span></div>
-      <div class="timeline__dot" aria-hidden="true"><span class="timeline__dot-outer"></span><span class="timeline__dot-inner"></span></div>
-
       <div class="timeline__milestones">
+        <div class="timeline__line" aria-hidden="true"></div>
         <!-- Milestone 1 — The Idea -->
         <div class="timeline__milestone timeline__milestone--left">
           <span class="eyebrow timeline__year">2023</span>
@@ -322,61 +307,26 @@ const jsonLd = {
   <FindUs bg="warm-white" />
 </BaseLayout>
 
-<!-- Tiny inline script: set --path-length for scroll-draw + Safari fallback -->
+<!-- Safari fallback for scroll-draw animation -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const path = document.querySelector('.timeline__path') as SVGPathElement | null;
-    if (!path) return;
+    if (CSS.supports('animation-timeline', 'view()')) return;
 
-    const length = path.getTotalLength();
-    path.style.setProperty('--path-length', String(length));
+    const body = document.querySelector('.timeline__body');
+    if (!body) return;
 
-    // Position dot nodes to align with actual milestone elements
-    const body = document.querySelector('.timeline__body') as HTMLElement | null;
-    const milestones = document.querySelectorAll('.timeline__milestone');
-    const dots = document.querySelectorAll('.timeline__dot') as NodeListOf<HTMLElement>;
-    const svg = document.querySelector('.timeline__svg') as SVGElement | null;
-
-    function positionDots() {
-      if (!body || !svg) return;
-      const bodyRect = body.getBoundingClientRect();
-      const svgRect = svg.getBoundingClientRect();
-      const svgCenterX = svgRect.left + svgRect.width / 2 - bodyRect.left;
-
-      milestones.forEach((ms, i) => {
-        if (!dots[i]) return;
-        // Align dot with the milestone title, not the year eyebrow
-        const title = ms.querySelector('.timeline__milestone-title');
-        const anchor = title || ms;
-        const anchorRect = anchor.getBoundingClientRect();
-        const dotTop = anchorRect.top - bodyRect.top + 4;
-        dots[i].style.left = `${svgCenterX - 8}px`;
-        dots[i].style.top = `${dotTop}px`;
-      });
-    }
-
-    positionDots();
-    window.addEventListener('resize', positionDots);
-
-    // Safari fallback: no support for animation-timeline: scroll()
-    const supportsScrollTimeline = CSS.supports('animation-timeline', 'view()');
-    if (!supportsScrollTimeline) {
-      const section = body;
-      if (!section) return;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              section.classList.add('is-visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.15 }
-      );
-      observer.observe(section);
-    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            body.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(body);
   });
 </script>
 
@@ -511,76 +461,68 @@ const jsonLd = {
     }
   }
 
-  /* SVG path */
-  .timeline__svg {
-    display: none;
+  /* --- Vertical line (inside .timeline__milestones, positioned absolutely) --- */
+  .timeline__line {
+    position: absolute;
+    width: 2px;
+    background: rgba(153, 96, 72, 0.35);
+    pointer-events: none;
+    z-index: 0;
+    top: 0;
+    bottom: 0;
   }
 
-  @media (min-width: 1024px) {
-    .timeline__svg {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 200px;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-  }
-
-  /* Mobile: SVG as a thin left-edge line */
+  /* Mobile/tablet: line along left edge, inside the milestone padding area */
   @media (max-width: 1023px) {
-    .timeline__svg {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 20px;
-      width: 40px;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
+    .timeline__line {
+      left: 28px;
     }
   }
 
-  /* Scroll-draw animation (Chrome, Firefox, Safari 18+) */
-  .timeline__path {
-    stroke-dasharray: var(--path-length);
-    stroke-dashoffset: var(--path-length);
-    animation: draw-path linear forwards;
+  /* Desktop: centered in the gap between left (cols 1-5) and right (cols 7-11) milestones.
+     Column 6 runs from 5/12 to 6/12. Its center = 11/24 of the grid width. */
+  @media (min-width: 1024px) {
+    .timeline__line {
+      left: calc(100% * 11 / 24);
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Scroll-draw animation via clip-path */
+  .timeline__line {
+    clip-path: inset(0 0 100% 0);
+    animation: reveal-line linear forwards;
     animation-timeline: view();
     animation-range: entry 20% exit 80%;
   }
 
-  @keyframes draw-path {
-    to {
-      stroke-dashoffset: 0;
-    }
+  @keyframes reveal-line {
+    to { clip-path: inset(0 0 0% 0); }
   }
 
   /* Safari fallback: animate on visibility */
   @supports not (animation-timeline: view()) {
-    .timeline__path {
+    .timeline__line {
       animation: none;
-      transition: stroke-dashoffset 2.5s ease-out;
+      clip-path: inset(0 0 100% 0);
+      transition: clip-path 2.5s ease-out;
     }
 
-    .is-visible .timeline__path {
-      stroke-dashoffset: 0;
+    .is-visible .timeline__line {
+      clip-path: inset(0 0 0% 0);
     }
   }
 
-  /* Reduced motion: show full path immediately */
+  /* Reduced motion: show full line immediately */
   @media (prefers-reduced-motion: reduce) {
-    .timeline__path {
+    .timeline__line {
       animation: none;
-      stroke-dashoffset: 0;
+      clip-path: inset(0);
       transition: none;
     }
   }
 
-  /* Milestones */
+  /* --- Milestones --- */
   .timeline__milestones {
     position: relative;
     z-index: 1;
@@ -593,32 +535,93 @@ const jsonLd = {
     position: relative;
   }
 
-  /* Milestone dot nodes — positioned by JS to align with actual milestones */
-  .timeline__dot {
+  /* Milestone dots — pseudo-elements on each milestone */
+  .timeline__milestone::before {
+    content: '';
     position: absolute;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .timeline__dot-outer {
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background: var(--color-terracotta);
-    opacity: 0.5;
-    position: absolute;
-    top: 0;
-    left: 0;
+    background: rgba(153, 96, 72, 0.5);
+    z-index: 2;
+    pointer-events: none;
   }
 
-  .timeline__dot-inner {
+  .timeline__milestone::after {
+    content: '';
+    position: absolute;
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background: var(--color-terracotta);
-    position: absolute;
-    top: 4px;
-    left: 4px;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Mobile/tablet: dots on the left line, aligned with milestone title */
+  @media (max-width: 1023px) {
+    .timeline__milestone {
+      padding-left: 56px;
+    }
+
+    .timeline__milestone::before {
+      left: 20px;
+      top: 28px;
+    }
+
+    .timeline__milestone::after {
+      left: 24px;
+      top: 32px;
+    }
+  }
+
+  /* Desktop: dots at center of 12-col grid, aligned with title */
+  @media (min-width: 1024px) {
+    .timeline__milestones {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--space-4xl) 0;
+    }
+
+    .timeline__milestone--left {
+      grid-column: 1 / 6;
+      text-align: left;
+    }
+
+    /* Line div is child 1, so milestones are children 2-4 */
+    .timeline__milestone:nth-child(2) { grid-row: 1; }
+    .timeline__milestone:nth-child(3) { grid-row: 2; }
+    .timeline__milestone:nth-child(4) { grid-row: 3; }
+
+    .timeline__milestone--right {
+      grid-column: 7 / 12;
+      text-align: left;
+    }
+
+    /* Dot positioning: milestones span 5/12 of the grid.
+       Center of column 6 = 11/24 of grid width.
+       Left milestone (cols 1-5): dot at 11/24 from grid left = 110% of milestone width.
+       Right milestone (cols 7-11): dot at 11/24 - 6/12 = -1/24 from milestone left = -10% of milestone width. */
+
+    .timeline__milestone--left::before {
+      left: calc(110% - 8px);
+      top: 6px;
+    }
+
+    .timeline__milestone--left::after {
+      left: calc(110% - 4px);
+      top: 10px;
+    }
+
+    .timeline__milestone--right::before {
+      left: calc(-10% - 8px);
+      top: 6px;
+    }
+
+    .timeline__milestone--right::after {
+      left: calc(-10% - 4px);
+      top: 10px;
+    }
   }
 
   .timeline__year {
@@ -643,36 +646,6 @@ const jsonLd = {
     line-height: var(--line-body);
     color: var(--color-espresso);
     max-width: 48ch;
-  }
-
-  /* Mobile: left-aligned with padding for SVG line */
-  @media (max-width: 1023px) {
-    .timeline__milestone {
-      padding-left: 56px;
-    }
-  }
-
-  /* Desktop: 12-col grid, alternating left/right */
-  @media (min-width: 1024px) {
-    .timeline__milestones {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: var(--space-4xl) 0;
-    }
-
-    .timeline__milestone--left {
-      grid-column: 1 / 6;
-      text-align: left;
-    }
-
-    .timeline__milestone:nth-child(1) { grid-row: 1; }
-    .timeline__milestone:nth-child(2) { grid-row: 2; }
-    .timeline__milestone:nth-child(3) { grid-row: 3; }
-
-    .timeline__milestone--right {
-      grid-column: 7 / 12;
-      text-align: left;
-    }
   }
 
   /* Pull quote */
