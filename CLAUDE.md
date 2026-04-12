@@ -140,9 +140,23 @@ Rules for working with the archive:
 
 - When a task is ambiguous, ask. A short clarifying question in the response is always better than a confident wrong guess.
 - Flag assumptions explicitly in responses. Do not bury them in code comments.
-- Keep commits small and focused. One logical change per commit.
+- **One commit, one push per prompt.** Each prompt file produces exactly one commit and one push to `main`. Do not split a prompt's work into multiple commits. Squash everything from a single prompt into one well-named commit. Push immediately after committing. This is a hard rule, not a suggestion.
 - Do not run destructive Git operations (force push, hard reset, branch deletion) without being explicitly asked.
 - Do not install dependencies casually. Every new package should have a reason that fits the stack rules above.
 - Performance, accessibility, and contrast are not polish items. They are requirements from day one.
+
+## Skill Ordering
+
+Design skills must run **before** writing code, not after. The correct sequence for every prompt is:
+
+1. Read this file and the prompt file.
+2. Run `/impeccable teach` (if not already loaded in the session) and any other relevant planning skills (`shape`, etc.) to gather design context and inform decisions.
+3. Write code.
+4. Run `audit` and `critique` for verification.
+5. Commit and push (one commit, one push).
+
+Do not code first and then try to run design skills as an afterthought. The skills exist to inform the code, not to rubber-stamp it.
+
+**Verification is not a Playwright walkthrough.** Use `audit` for accessibility, performance, responsive, and theming checks. Use `critique` for UX-level design review. Use `polish` for the final micro-detail pass. Only use Playwright for specific targeted checks when a prompt explicitly calls for one (e.g., confirming a map embed loaded, checking a specific computed style). Do not manually navigate the site at multiple viewports and take screenshots as a general verification step.
 
 This file is the contract. Read it before every task.

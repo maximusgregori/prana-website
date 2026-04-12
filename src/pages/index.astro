@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PlaceholderImage from '../components/PlaceholderImage.astro';
 import { withBase } from '../lib/paths';
 
-const title = 'Prana Wellness Club — Austin Pilates, Yoga, and Recovery';
+const title = 'Home | Prana Wellness Club';
 const description =
   'A boutique Austin wellness studio for Reformer Pilates, Mat Pilates, and yoga, with sauna, steam, and cold plunge recovery. Move with intention. Rest with purpose.';
 
@@ -15,6 +15,7 @@ const heroPoster = withBase('/images/home/hero-poster.jpg');
 const heroVideoMp4 = withBase('/videos/home/hero-bg.mp4');
 const heroVideoMov = withBase('/videos/home/hero-bg.mov');
 const spaceVideoMp4 = withBase('/videos/home/space-card.mp4');
+const spacePoster = withBase('/images/home/space-poster.jpg');
 const membershipImage = withBase('/images/home/membership.jpg');
 const storyImage = withBase('/images/home/story.jpg');
 const classHeatedVinyasaImg = withBase('/images/home/classes/heated-vinyasa.jpg');
@@ -56,7 +57,7 @@ const jsonLd = {
 
 const tiles = [
   {
-    number: '01 — Practice',
+    number: '01 · PRACTICE',
     label: 'Yoga',
     image: withBase('/images/home/yoga-card.jpg'),
     alt: 'Prana yoga studio during a class',
@@ -65,7 +66,7 @@ const tiles = [
     link: { href: classesHref, label: 'See the schedule' },
   },
   {
-    number: '02 — Strengthen',
+    number: '02 · STRENGTHEN',
     label: 'Pilates',
     image: withBase('/images/home/pilates-card.jpg'),
     alt: 'A Pilates reformer class at Prana',
@@ -74,7 +75,7 @@ const tiles = [
     link: { href: classesHref, label: 'See the schedule' },
   },
   {
-    number: '03 — Restore',
+    number: '03 · RESTORE',
     label: 'The Space',
     image: withBase('/images/home/space-card.jpg'),
     alt: 'The wooden reformers and recovery space at Prana',
@@ -90,7 +91,7 @@ const featuredClasses = [
     title: 'Heated Vinyasa',
     description:
       'A flowing, breath-led practice in a warm room. Builds strength, sweat, and stillness in equal measure.',
-    meta: ['60 min', 'Heated 95°F'],
+    meta: ['60 MIN', 'HEATED 95°F'],
     href: withBase('/classes/heated-vinyasa'),
     image: classHeatedVinyasaImg,
     alt: 'A heated vinyasa class at Prana',
@@ -100,7 +101,7 @@ const featuredClasses = [
     title: 'Pilates Reformer',
     description:
       'Small-group Reformer work focused on posture, control, and long muscle tone. Great for first-timers and regulars.',
-    meta: ['50 min', 'Neutral'],
+    meta: ['50 MIN', 'NEUTRAL'],
     href: withBase('/classes/pilates-reformer'),
     image: classPilatesReformerImg,
     alt: 'Wooden reformers at Prana',
@@ -110,7 +111,7 @@ const featuredClasses = [
     title: 'Yin',
     description:
       'Long holds, deep breath, and quiet mats. A reset for anyone living in their shoulders or their phone.',
-    meta: ['75 min', 'Warm 80°F'],
+    meta: ['75 MIN', 'WARM 80°F'],
     href: withBase('/classes/yin'),
     image: classYinImg,
     alt: 'A student in a yin stretch on the mat',
@@ -120,7 +121,7 @@ const featuredClasses = [
     title: 'Strength & Mobility Flow',
     description:
       'Loaded strength work woven into a mobility practice. For when you want yoga to hit like a training session.',
-    meta: ['55 min', 'Neutral'],
+    meta: ['55 MIN', 'NEUTRAL'],
     href: withBase('/classes/strength-mobility-flow'),
     image: null,
     alt: null,
@@ -157,8 +158,8 @@ const featuredClasses = [
       </h1>
       <p class="hero__support">A boutique Austin studio for Pilates, yoga, and recovery.</p>
       <div class="hero__actions">
-        <a href={bookHref} class="pill-primary hero__cta-primary">Book a Class</a>
-        <a href={membershipsHref} class="pill-ghost hero__cta-ghost">Memberships</a>
+        <a href={bookHref} class="btn btn-primary hero__cta">Book a Class</a>
+        <a href={membershipsHref} class="btn btn-ghost btn-ghost--light hero__cta">Memberships</a>
       </div>
     </div>
   </section>
@@ -224,7 +225,7 @@ const featuredClasses = [
       <div class="story__image">
         <img
           src={storyImage}
-          alt="Inside the Prana studio — warm wood, natural light, and plants"
+          alt="Inside the Prana studio, warm wood, natural light, and plants"
           width="840"
           height="1050"
           loading="lazy"
@@ -263,43 +264,39 @@ const featuredClasses = [
         <h2 class="featured__headline">Classes worth showing up for.</h2>
       </div>
 
-      <ul class="featured__grid">
+      <ul class="featured__stack">
         {featuredClasses.map((c) => (
           <li class="class-card">
-            <a href={c.href} class="class-card__link">
-              <div class="class-card__image">
-                {c.image ? (
-                  <img
-                    src={c.image}
-                    alt={c.alt}
-                    width="900"
-                    height="600"
-                    loading="lazy"
-                  />
-                ) : (
-                  <PlaceholderImage
-                    ratio="3 / 2"
-                    label={`Class photo — ${c.title}`}
-                    alt={`Placeholder image for the ${c.title} class`}
-                  />
-                )}
-              </div>
-              <div class="class-card__body">
-                <span class="eyebrow class-card__eyebrow">{c.category}</span>
-                <h3 class="class-card__title">{c.title}</h3>
-                <p class="class-card__description">{c.description}</p>
-                <div class="class-card__meta">
-                  {c.meta.map((m) => <span class="class-card__meta-item">{m}</span>)}
-                </div>
-                <span class="link-arrow">View class <span aria-hidden="true">→</span></span>
-              </div>
-            </a>
+            <div class="class-card__image">
+              {c.image ? (
+                <img
+                  src={c.image}
+                  alt={c.alt}
+                  width="900"
+                  height="600"
+                  loading="lazy"
+                />
+              ) : (
+                <PlaceholderImage
+                  ratio="3 / 2"
+                  label={`Class photo, ${c.title}`}
+                  alt={`Placeholder image for the ${c.title} class`}
+                />
+              )}
+            </div>
+            <div class="class-card__body">
+              <span class="eyebrow class-card__eyebrow">{c.category}</span>
+              <h3 class="class-card__title">{c.title}</h3>
+              <p class="class-card__description">{c.description}</p>
+              <span class="class-card__meta">{c.meta[0]} · {c.meta[1]}</span>
+              <a href={c.href} class="link-arrow">View class <span aria-hidden="true">→</span></a>
+            </div>
           </li>
         ))}
       </ul>
 
       <div class="featured__cta">
-        <a href={classesHref} class="btn btn-ghost">See all classes</a>
+        <a href={classesHref} class="btn btn-primary">See all classes</a>
       </div>
     </div>
   </section>
@@ -314,7 +311,7 @@ const featuredClasses = [
         loop
         playsinline
         preload="metadata"
-        poster={heroPoster}
+        poster={spacePoster}
         aria-hidden="true"
       >
         <source src={spaceVideoMp4} type="video/mp4" />
@@ -324,12 +321,12 @@ const featuredClasses = [
 
     <div class="space__content container">
       <span class="eyebrow space__eyebrow">The Space</span>
-      <h2 id="space-headline" class="space__headline">Heat. Cold. Quiet.</h2>
+      <h2 id="space-headline" class="space__headline">Wind down your way.</h2>
       <p class="space__body">
         An infrared sauna, a cold plunge, a steam room, and a lounge with the best elixir bar in
         town. Our recovery space is included with every membership.
       </p>
-      <a href={studioHref} class="link-ghost space__link">See the space <span aria-hidden="true">→</span></a>
+      <a href={studioHref} class="btn btn-ghost btn-ghost--light space__link">See the space →</a>
     </div>
   </section>
 
@@ -357,7 +354,7 @@ const featuredClasses = [
         <span class="eyebrow membership__founding">Now accepting founding members</span>
         <div class="membership__actions">
           <a href={membershipsHref} class="btn btn-primary">See membership options</a>
-          <a href={bookHref} class="link-ghost">Or book a single class <span aria-hidden="true">→</span></a>
+          <a href={bookHref} class="btn btn-ghost">Or book a single class →</a>
         </div>
       </div>
     </div>
@@ -383,7 +380,7 @@ const featuredClasses = [
 
         <div class="find__actions">
           <a href={mapDirectionsHref} target="_blank" rel="noreferrer noopener" class="btn btn-primary">Get directions</a>
-          <a href={contactHref} class="link-ghost">Questions? Contact us <span aria-hidden="true">→</span></a>
+          <a href={contactHref} class="btn btn-ghost">Questions? Contact us →</a>
         </div>
       </div>
 
@@ -405,8 +402,6 @@ const featuredClasses = [
   .hero {
     position: relative;
     min-height: 100svh;
-    display: flex;
-    align-items: flex-end;
     overflow: hidden;
     isolation: isolate;
   }
@@ -429,13 +424,7 @@ const featuredClasses = [
   .hero__gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to top,
-      rgba(58, 42, 34, 0.75) 0%,
-      rgba(58, 42, 34, 0.45) 35%,
-      rgba(58, 42, 34, 0.05) 70%,
-      transparent 100%
-    );
+    background: rgba(58, 42, 34, 0.55);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -450,19 +439,17 @@ const featuredClasses = [
   }
 
   .hero__content {
-    position: relative;
-    max-width: var(--content-max);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    margin-inline: auto;
-    padding-inline: var(--space-lg);
-    padding-bottom: var(--space-2xl);
-  }
-
-  @media (min-width: 768px) {
-    .hero__content {
-      padding-inline: var(--space-2xl);
-      padding-bottom: var(--space-3xl);
-    }
+    max-width: var(--content-max);
+    padding-inline: var(--space-2xl);
   }
 
   .hero__eyebrow {
@@ -477,7 +464,6 @@ const featuredClasses = [
     font-size: var(--size-h1);
     line-height: var(--line-tight);
     color: var(--color-warm-white);
-    max-width: 14ch;
     margin-bottom: var(--space-lg);
     text-wrap: balance;
   }
@@ -489,45 +475,28 @@ const featuredClasses = [
     max-width: 48ch;
     line-height: 1.5;
     margin-bottom: var(--space-xl);
+    text-align: center;
   }
 
   .hero__actions {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    max-width: 100%;
+    width: 100%;
+    max-width: 360px;
   }
 
   @media (min-width: 640px) {
     .hero__actions {
       flex-direction: row;
       gap: var(--space-md);
+      max-width: none;
+      width: auto;
     }
   }
 
-  .hero__cta-primary,
-  .hero__cta-ghost {
-    padding: 14px 28px;
-    font-size: 15px;
-  }
-
-  .hero__cta-ghost {
-    background: transparent;
-    border: 1px solid var(--color-warm-white);
-    color: var(--color-warm-white);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  .hero__cta-ghost:hover,
-  .hero__cta-ghost:focus-visible {
-    background: var(--color-warm-white);
-    color: var(--color-deep-brown);
-  }
-
   @media (max-width: 639px) {
-    .hero__cta-primary,
-    .hero__cta-ghost {
+    .hero__cta {
       width: 100%;
     }
   }
@@ -790,9 +759,7 @@ const featuredClasses = [
     line-height: var(--line-snug);
     color: var(--color-terracotta);
     max-width: 22ch;
-    border-top: 1px solid var(--color-hairline);
-    padding-top: var(--space-sm);
-    margin: var(--space-sm) 0;
+    margin-block: var(--space-xl);
   }
 
   /* ==================== SECTION 5 — FEATURED CLASSES ==================== */
@@ -823,43 +790,45 @@ const featuredClasses = [
     color: var(--color-deep-brown);
   }
 
-  .featured__grid {
-    display: grid;
-    grid-template-columns: 1fr;
+  .featured__stack {
+    display: flex;
+    flex-direction: column;
     gap: var(--space-2xl);
   }
 
-  @media (min-width: 640px) {
-    .featured__grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-xl);
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .featured__grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
   .class-card {
-    display: block;
-  }
-
-  .class-card__link {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
-    color: inherit;
-    height: 100%;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .class-card {
+      flex-direction: row;
+      gap: var(--space-2xl);
+    }
   }
 
   .class-card__image {
     width: 100%;
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     background-color: var(--color-placeholder);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 768px) {
+    .class-card__image {
+      width: 35%;
+      aspect-ratio: 3 / 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .class-card__image {
+      width: 40%;
+    }
   }
 
   .class-card__image img {
@@ -867,20 +836,19 @@ const featuredClasses = [
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: filter var(--dur-slow) var(--ease-out);
-    filter: brightness(0.98);
-  }
-
-  .class-card__link:hover .class-card__image img,
-  .class-card__link:focus-visible .class-card__image img {
-    filter: brightness(1.03);
   }
 
   .class-card__body {
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
-    padding-top: var(--space-xs);
+    justify-content: center;
+  }
+
+  @media (min-width: 768px) {
+    .class-card__body {
+      flex: 1;
+    }
   }
 
   .class-card__eyebrow {
@@ -894,53 +862,29 @@ const featuredClasses = [
     color: var(--color-deep-brown);
     line-height: var(--line-snug);
     margin-top: var(--space-xs);
-    transition: color var(--dur-med) var(--ease-out);
-  }
-
-  .class-card__link:hover .class-card__title,
-  .class-card__link:focus-visible .class-card__title {
-    color: var(--color-terracotta);
   }
 
   .class-card__description {
-    font-size: var(--size-body-sm);
+    font-size: var(--size-body);
     line-height: var(--line-body);
     color: var(--color-espresso);
     margin-top: var(--space-xs);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .class-card__meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-md);
+    display: block;
     margin-top: var(--space-sm);
     font-family: var(--font-body);
+    font-weight: 500;
     font-size: var(--size-eyebrow);
     text-transform: uppercase;
     letter-spacing: var(--tracking-eyebrow);
-    color: var(--color-espresso);
-    opacity: 0.7;
-  }
-
-  .class-card__meta-item {
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .class-card__meta-item + .class-card__meta-item::before {
-    content: '·';
-    margin-right: var(--space-md);
-    margin-left: calc(var(--space-md) * -1);
-    opacity: 0.5;
+    color: var(--color-sage);
   }
 
   .class-card .link-arrow {
     margin-top: var(--space-md);
+    align-self: flex-start;
   }
 
   .featured__cta {
@@ -981,13 +925,7 @@ const featuredClasses = [
   .space__gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to top,
-      rgba(58, 42, 34, 0.85) 0%,
-      rgba(58, 42, 34, 0.55) 25%,
-      rgba(58, 42, 34, 0.15) 55%,
-      transparent 80%
-    );
+    background: rgba(58, 42, 34, 0.55);
   }
 
   .space__content {
@@ -1024,14 +962,7 @@ const featuredClasses = [
   }
 
   .space__link {
-    color: var(--color-warm-white);
-    border-bottom-color: rgba(245, 239, 226, 0.4);
-  }
-
-  .space__link:hover,
-  .space__link:focus-visible {
-    color: var(--color-golden);
-    border-bottom-color: var(--color-golden);
+    margin-top: var(--space-sm);
   }
 
   /* ==================== SECTION 7 — MEMBERSHIP ==================== */

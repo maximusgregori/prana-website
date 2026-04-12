@@ -23,6 +23,10 @@ pnpm-debug.log*
 home-*.jpeg
 home-*.png
 
+# prompt files and content archive (local only)
+prompts/
+content-archive/
+
 # editor
 .vscode/*
 !.vscode/extensions.json

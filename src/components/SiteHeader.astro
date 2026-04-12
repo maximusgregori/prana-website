@@ -10,11 +10,11 @@ const navLinks = [
   { href: withBase('/private-events'), label: 'Private Events' },
 ];
 const bookHref = withBase('/book');
-const membershipsHref = withBase('/memberships');
 const homeHref = withBase('/');
 ---
 
-<a href={homeHref} class="site-wordmark" aria-label="Prana Wellness Club — Home">Prana</a>
+<header class="site-header" role="banner">
+<a href={homeHref} class="site-wordmark" aria-label="Prana Wellness Club, Home">Prana</a>
 
 <nav class="nav-pill" aria-label="Primary">
   <ul>
@@ -25,8 +25,7 @@ const homeHref = withBase('/');
 </nav>
 
 <div class="site-ctas" aria-hidden="false">
-  <a href={membershipsHref} class="pill-ghost">Memberships</a>
-  <a href={bookHref} class="pill-primary">Book a Class</a>
+  <a href={bookHref} class="btn btn-primary btn-sm header-cta">Book a Class</a>
 </div>
 
 <button
@@ -41,6 +40,8 @@ const homeHref = withBase('/');
   <span></span>
   <span></span>
 </button>
+
+</header>
 
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true" inert>
   <button class="mobile-menu__close" type="button" aria-label="Close menu" id="menu-close">
@@ -57,23 +58,22 @@ const homeHref = withBase('/');
     </ul>
   </nav>
   <div class="mobile-menu__ctas">
-    <a href={membershipsHref} class="pill-ghost mobile-menu__cta mobile-menu__cta--ghost">Memberships</a>
-    <a href={bookHref} class="pill-primary mobile-menu__cta">Book a Class</a>
+    <a href={bookHref} class="btn btn-primary mobile-menu__cta">Book a Class</a>
   </div>
 </div>
 
 <style is:global>
   :root[data-header-mode="dark"] {
     --header-fg: var(--color-warm-white);
-    --header-bg: rgba(245, 239, 226, 0.08);
+    --header-bg: rgba(58, 42, 34, 0.55);
     --header-bg-solid: var(--color-deep-brown);
-    --header-border: rgba(245, 239, 226, 0.35);
+    --header-border: rgba(245, 239, 226, 0.25);
   }
   :root[data-header-mode="light"] {
     --header-fg: var(--color-deep-brown);
-    --header-bg: rgba(58, 42, 34, 0.06);
+    --header-bg: rgba(245, 239, 226, 0.82);
     --header-bg-solid: var(--color-warm-white);
-    --header-border: rgba(58, 42, 34, 0.18);
+    --header-border: rgba(58, 42, 34, 0.12);
   }
 
   .site-wordmark,
@@ -93,9 +93,7 @@ const homeHref = withBase('/');
     .nav-pill,
     .site-ctas,
     .site-menu-toggle,
-    .nav-pill a,
-    .pill-ghost,
-    .pill-primary {
+    .nav-pill a {
       transition: none;
     }
   }
@@ -115,6 +113,13 @@ const homeHref = withBase('/');
     color: var(--color-terracotta);
   }
 
+  :root[data-header-mode="dark"] .site-wordmark {
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+  }
+  :root[data-header-mode="light"] .site-wordmark {
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+
   .nav-pill {
     left: 50%;
     transform: translateX(-50%);
@@ -123,8 +128,9 @@ const homeHref = withBase('/');
     -webkit-backdrop-filter: blur(20px) saturate(1.1);
     border: 1px solid var(--header-border);
     border-radius: 999px;
-    padding: 10px 20px;
+    padding: 0 20px;
     display: none;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   }
 
   @media (min-width: 900px) {
@@ -146,7 +152,7 @@ const homeHref = withBase('/');
     letter-spacing: 0.02em;
     color: var(--header-fg);
     text-decoration: none;
-    padding: 6px 4px;
+    padding: 15px 4px;
     display: block;
     transition: color var(--dur-fast) ease;
   }
@@ -172,55 +178,10 @@ const homeHref = withBase('/');
     .site-ctas { display: inline-flex; }
   }
 
-  .pill-ghost,
-  .pill-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 999px;
-    padding: 10px 20px;
-    font-family: var(--font-body);
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.02em;
-    line-height: 1;
-    text-decoration: none;
-    border: 1px solid transparent;
-    transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease, border-color var(--dur-fast) ease;
-    cursor: pointer;
+  .header-cta {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
   }
 
-  .pill-ghost {
-    background: transparent;
-    border-color: var(--header-fg);
-    color: var(--header-fg);
-    backdrop-filter: blur(20px) saturate(1.1);
-    -webkit-backdrop-filter: blur(20px) saturate(1.1);
-  }
-
-  .pill-ghost:hover,
-  .pill-ghost:focus-visible {
-    background: var(--header-fg);
-    color: var(--header-bg-solid);
-  }
-
-  .pill-primary {
-    background: var(--color-terracotta);
-    border-color: var(--color-terracotta);
-    color: var(--color-warm-white);
-  }
-
-  .pill-primary:hover,
-  .pill-primary:focus-visible {
-    background: #a0624a;
-    border-color: #a0624a;
-  }
-
-  .pill-ghost:focus-visible,
-  .pill-primary:focus-visible {
-    outline: 2px solid var(--color-terracotta);
-    outline-offset: 3px;
-  }
 
   .site-menu-toggle {
     right: var(--space-lg);
@@ -352,16 +313,6 @@ const homeHref = withBase('/');
     font-size: 15px;
   }
 
-  .mobile-menu__cta--ghost {
-    background: transparent;
-    border-color: var(--color-deep-brown);
-    color: var(--color-deep-brown);
-  }
-
-  .mobile-menu__cta--ghost:hover {
-    background: var(--color-deep-brown);
-    color: var(--color-warm-white);
-  }
 </style>
 
 <script is:inline>
