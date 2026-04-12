@@ -1,18 +1,23 @@
 ---
+import { withBase } from '../lib/paths';
+
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/studio', label: 'The Studio' },
-  { href: '/classes', label: 'Classes' },
-  { href: '/memberships', label: 'Memberships' },
-  { href: '/team', label: 'Team' },
-  { href: '/private-events', label: 'Private Events' },
+  { href: withBase('/'), label: 'Home' },
+  { href: withBase('/studio'), label: 'The Studio' },
+  { href: withBase('/classes'), label: 'Classes' },
+  { href: withBase('/memberships'), label: 'Memberships' },
+  { href: withBase('/team'), label: 'Team' },
+  { href: withBase('/private-events'), label: 'Private Events' },
 ];
+const bookHref = withBase('/book');
+const homeHref = withBase('/');
+const logoSrc = withBase('/images/logo.png');
 ---
 
 <header class="site-header">
   <div class="site-header__inner">
-    <a href="/" class="site-header__logo" aria-label="Prana Wellness Club — Home">
-      <img src="/images/logo.png" alt="Prana Wellness Club" width="120" height="40" />
+    <a href={homeHref} class="site-header__logo" aria-label="Prana Wellness Club — Home">
+      <img src={logoSrc} alt="Prana Wellness Club" width="120" height="40" />
     </a>
 
     <nav class="site-header__nav" aria-label="Primary">
@@ -21,7 +26,7 @@ const navLinks = [
           <li><a href={link.href}>{link.label}</a></li>
         ))}
       </ul>
-      <a href="/book" class="btn btn-primary site-header__cta">Book a Class</a>
+      <a href={bookHref} class="btn btn-primary site-header__cta">Book a Class</a>
     </nav>
 
     <button
@@ -50,7 +55,7 @@ const navLinks = [
           <li><a href={link.href}>{link.label}</a></li>
         ))}
       </ul>
-      <a href="/book" class="btn btn-primary mobile-menu__cta">Book a Class</a>
+      <a href={bookHref} class="btn btn-primary mobile-menu__cta">Book a Class</a>
     </nav>
   </div>
 </header>

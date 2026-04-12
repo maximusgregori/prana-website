@@ -1,14 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PlaceholderImage from '../components/PlaceholderImage.astro';
+import { withBase } from '../lib/paths';
 
 const title = 'Prana Wellness Club — Austin Pilates, Yoga, and Recovery';
 const description =
   'A boutique Austin wellness studio for Reformer Pilates, Mat Pilates, and yoga, with sauna, steam, and cold plunge recovery. Move with intention. Rest with purpose.';
 
-const site = Astro.site ?? new URL('https://constanceit.github.io/prana-website/');
-const canonical = site.toString();
-const ogImage = new URL('/images/og/home.jpg', site).toString();
+const site = Astro.site ?? new URL('https://constanceit.github.io/');
+const canonical = new URL(Astro.url.pathname, site).toString();
+const ogImage = new URL(withBase('/images/og/home.jpg'), site).toString();
+
+const heroPoster = withBase('/images/home/hero-poster.jpg');
+const heroVideoMp4 = withBase('/videos/home/hero-bg.mp4');
+const heroVideoMov = withBase('/videos/home/hero-bg.mov');
+const spaceVideoMp4 = withBase('/videos/home/space-card.mp4');
+const membershipImage = withBase('/images/home/membership.jpg');
+const bookHref = withBase('/book');
+const classesHref = withBase('/classes');
+const studioHref = withBase('/studio');
+const membershipsHref = withBase('/memberships');
+const contactHref = withBase('/contact');
 
 const mapQuery = encodeURIComponent('1621 E 7th St, Austin, TX 78702');
 const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
@@ -44,29 +56,29 @@ const tiles = [
   {
     number: '01 — Practice',
     label: 'Yoga',
-    image: '/images/home/yoga-card.jpg',
+    image: withBase('/images/home/yoga-card.jpg'),
     alt: 'Prana yoga studio during a class',
     description:
       'Heated and unheated vinyasa, hatha, yin, and slow flow. Morning sessions, lunch breaks, and Wine Down Wednesdays. Open to every level.',
-    link: { href: '/classes', label: 'See the schedule' },
+    link: { href: classesHref, label: 'See the schedule' },
   },
   {
     number: '02 — Strengthen',
     label: 'Pilates',
-    image: '/images/home/pilates-card.jpg',
+    image: withBase('/images/home/pilates-card.jpg'),
     alt: 'A Pilates reformer class at Prana',
     description:
       'Reformer and mat classes built around posture, core, and long muscle tone. Small group sizes so instructors can actually adjust your form.',
-    link: { href: '/classes', label: 'See the schedule' },
+    link: { href: classesHref, label: 'See the schedule' },
   },
   {
     number: '03 — Restore',
     label: 'The Space',
-    image: '/images/home/space-card.jpg',
+    image: withBase('/images/home/space-card.jpg'),
     alt: 'The wooden reformers and recovery space at Prana',
     description:
       'Sauna, steam, cold plunge, and a quiet lounge to come down from the heat. Included with membership, open to class guests.',
-    link: { href: '/studio', label: 'Tour the studio' },
+    link: { href: studioHref, label: 'Tour the studio' },
   },
 ];
 
@@ -77,7 +89,7 @@ const featuredClasses = [
     description:
       'A flowing, breath-led practice in a warm room. Builds strength, sweat, and stillness in equal measure.',
     meta: ['60 min', 'Heated 95°F'],
-    href: '/classes/heated-vinyasa',
+    href: withBase('/classes/heated-vinyasa'),
   },
   {
     category: 'Pilates',
@@ -85,7 +97,7 @@ const featuredClasses = [
     description:
       'Small-group Reformer work focused on posture, control, and long muscle tone. Great for first-timers and regulars.',
     meta: ['50 min', 'Neutral'],
-    href: '/classes/pilates-reformer',
+    href: withBase('/classes/pilates-reformer'),
   },
   {
     category: 'Yin',
@@ -93,7 +105,7 @@ const featuredClasses = [
     description:
       'Long holds, deep breath, and quiet mats. A reset for anyone living in their shoulders or their phone.',
     meta: ['75 min', 'Warm 80°F'],
-    href: '/classes/yin',
+    href: withBase('/classes/yin'),
   },
   {
     category: 'Strength',
@@ -101,7 +113,7 @@ const featuredClasses = [
     description:
       'Loaded strength work woven into a mobility practice. For when you want yoga to hit like a training session.',
     meta: ['55 min', 'Neutral'],
-    href: '/classes/strength-mobility-flow',
+    href: withBase('/classes/strength-mobility-flow'),
   },
 ];
 ---
@@ -111,7 +123,7 @@ const featuredClasses = [
 
   <!-- SECTION 1 — HERO -->
   <section class="hero" aria-labelledby="hero-headline">
-    <div class="hero__media">
+    <div class="hero__media" style={`--hero-poster: url('${heroPoster}');`}>
       <video
         class="hero__video"
         autoplay
@@ -119,11 +131,11 @@ const featuredClasses = [
         loop
         playsinline
         preload="metadata"
-        poster="/images/home/hero-poster.jpg"
+        poster={heroPoster}
         aria-hidden="true"
       >
-        <source src="/videos/home/hero-bg.mp4" type="video/mp4" />
-        <source src="/videos/home/hero-bg.mov" type="video/quicktime" />
+        <source src={heroVideoMp4} type="video/mp4" />
+        <source src={heroVideoMov} type="video/quicktime" />
       </video>
       <div class="hero__gradient" aria-hidden="true"></div>
     </div>
@@ -134,7 +146,7 @@ const featuredClasses = [
         Move with intention.<br />Rest with purpose.
       </h1>
       <p class="hero__support">A boutique Austin studio for Pilates, yoga, and recovery.</p>
-      <a href="/book" class="btn btn-primary-light hero__cta">Book a Class</a>
+      <a href={bookHref} class="btn btn-primary-light hero__cta">Book a Class</a>
     </div>
 
     <div class="hero__scroll" aria-hidden="true">
@@ -229,7 +241,7 @@ const featuredClasses = [
           walked in.
         </p>
 
-        <a href="/studio" class="link-ghost story__link">Read the full story <span aria-hidden="true">→</span></a>
+        <a href={studioHref} class="link-ghost story__link">Read the full story <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -268,7 +280,7 @@ const featuredClasses = [
       </ul>
 
       <div class="featured__cta">
-        <a href="/classes" class="btn btn-ghost">See all classes</a>
+        <a href={classesHref} class="btn btn-ghost">See all classes</a>
       </div>
     </div>
   </section>
@@ -283,10 +295,10 @@ const featuredClasses = [
         loop
         playsinline
         preload="metadata"
-        poster="/images/home/hero-poster.jpg"
+        poster={heroPoster}
         aria-hidden="true"
       >
-        <source src="/videos/home/space-card.mp4" type="video/mp4" />
+        <source src={spaceVideoMp4} type="video/mp4" />
       </video>
       <div class="space__gradient" aria-hidden="true"></div>
     </div>
@@ -298,7 +310,7 @@ const featuredClasses = [
         An infrared sauna, a cold plunge, a steam room, and a lounge with the best elixir bar in
         town. Our recovery space is included with every membership.
       </p>
-      <a href="/studio" class="link-ghost space__link">See the space <span aria-hidden="true">→</span></a>
+      <a href={studioHref} class="link-ghost space__link">See the space <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
@@ -307,7 +319,7 @@ const featuredClasses = [
     <div class="membership__grid">
       <div class="membership__image-wrap">
         <img
-          src="/images/home/membership.jpg"
+          src={membershipImage}
           alt="A quiet corner of the Prana studio"
           width="960"
           height="1200"
@@ -325,8 +337,8 @@ const featuredClasses = [
         </p>
         <span class="eyebrow membership__founding">Now accepting founding members</span>
         <div class="membership__actions">
-          <a href="/memberships" class="btn btn-primary">See membership options</a>
-          <a href="/book" class="link-ghost">Or book a single class <span aria-hidden="true">→</span></a>
+          <a href={membershipsHref} class="btn btn-primary">See membership options</a>
+          <a href={bookHref} class="link-ghost">Or book a single class <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -352,7 +364,7 @@ const featuredClasses = [
 
         <div class="find__actions">
           <a href={mapDirectionsHref} target="_blank" rel="noreferrer noopener" class="btn btn-primary">Get directions</a>
-          <a href="/contact" class="link-ghost">Questions? Contact us <span aria-hidden="true">→</span></a>
+          <a href={contactHref} class="link-ghost">Questions? Contact us <span aria-hidden="true">→</span></a>
         </div>
       </div>
 
@@ -412,7 +424,7 @@ const featuredClasses = [
       display: none;
     }
     .hero__media {
-      background-image: url('/images/home/hero-poster.jpg');
+      background-image: var(--hero-poster);
       background-size: cover;
       background-position: center;
     }

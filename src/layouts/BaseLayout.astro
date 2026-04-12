@@ -4,6 +4,7 @@ import '../styles/reset.css';
 import '../styles/base.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import { withBase } from '../lib/paths';
 
 interface Props {
   title: string;
@@ -21,9 +22,9 @@ const {
   canonical,
 } = Astro.props;
 
-const site = Astro.site ?? new URL('https://constanceit.github.io/prana-website/');
+const site = Astro.site ?? new URL('https://constanceit.github.io/');
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site).toString();
-const ogImageUrl = new URL(ogImage, site).toString();
+const ogImageUrl = new URL(withBase(ogImage), site).toString();
 ---
 
 <!doctype html>
@@ -49,7 +50,7 @@ const ogImageUrl = new URL(ogImage, site).toString();
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
