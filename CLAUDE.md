@@ -140,8 +140,8 @@ Rules for working with the archive:
 
 - When a task is ambiguous, ask. A short clarifying question in the response is always better than a confident wrong guess.
 - Flag assumptions explicitly in responses. Do not bury them in code comments.
-- **One commit, one push per prompt.** Each prompt file produces exactly one commit and one push to `main`. Do not split a prompt's work into multiple commits. Squash everything from a single prompt into one well-named commit. Push immediately after committing. This is a hard rule, not a suggestion.
-- Do not run destructive Git operations (force push, hard reset, branch deletion) without being explicitly asked.
+- **Do not commit or push unless explicitly told to.** Never run `git commit`, `git push`, `git commit --amend`, or `git push --force-with-lease` on your own initiative. Wait for the user to say "commit and push" or equivalent. When the user does tell you to commit and push, make one normal commit (`git commit`, no `--amend` flag) and one normal push (`git push`, no `--force` or `--force-with-lease` flag). Never amend. Never force push. Never squash.
+- Do not run any other destructive Git operations (hard reset, branch deletion) without being explicitly asked.
 - Do not install dependencies casually. Every new package should have a reason that fits the stack rules above.
 - Performance, accessibility, and contrast are not polish items. They are requirements from day one.
 
@@ -153,7 +153,7 @@ Design skills must run **before** writing code, not after. The correct sequence 
 2. Run `/impeccable teach` (if not already loaded in the session) and any other relevant planning skills (`shape`, etc.) to gather design context and inform decisions.
 3. Write code.
 4. Run `audit` and `critique` for verification.
-5. Commit and push (one commit, one push).
+5. Stop and report. Do NOT commit or push. Wait for the user to tell you to commit and push.
 
 Do not code first and then try to run design skills as an afterthought. The skills exist to inform the code, not to rubber-stamp it.
 
