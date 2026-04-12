@@ -12,50 +12,22 @@ const canonical = new URL(Astro.url.pathname, site).toString();
 const ogImage = new URL(withBase('/images/og/studio.jpg'), site).toString();
 
 const heroImage = withBase('/images/studio/hero.jpg');
-const storyImage = withBase('/images/studio/story.jpg');
 const membershipImage = withBase('/images/studio/membership.jpg');
 
 const classesHref = withBase('/classes');
 const membershipsHref = withBase('/memberships');
 const bookHref = withBase('/book');
 
-const galleryImages = [
-  {
-    src: withBase('/images/studio/gallery/reformers.jpg'),
-    alt: 'Rows of custom wooden Pilates reformers at Prana Wellness Club',
-    width: 1400,
-    height: 1750,
-  },
-  {
-    src: withBase('/images/studio/gallery/yoga-room.jpg'),
-    alt: 'The heated yoga studio at Prana with warm lighting and laid-out mats',
-    width: 1200,
-    height: 1800,
-  },
-  {
-    src: withBase('/images/studio/gallery/lounge.jpg'),
-    alt: 'Members chatting at the lounge and elixir bar after class',
-    width: 1400,
-    height: 1750,
-  },
-  {
-    src: withBase('/images/studio/gallery/details.jpg'),
-    alt: 'Warm lighting and natural textures inside the Prana studio',
-    width: 1200,
-    height: 1500,
-  },
-  {
-    src: withBase('/images/studio/gallery/community.jpg'),
-    alt: 'Two members hugging after a class at Prana',
-    width: 1200,
-    height: 1500,
-  },
-  {
-    src: withBase('/images/studio/gallery/stretch.jpg'),
-    alt: 'Overhead view of a yoga stretch on the mat',
-    width: 768,
-    height: 755,
-  },
+const instagramImages = [
+  { src: withBase('/images/studio/instagram/01.jpg'), alt: 'Rows of wooden Pilates reformers at Prana', width: 600, height: 800 },
+  { src: withBase('/images/studio/instagram/02.jpg'), alt: 'Members chatting at the Prana lounge after class', width: 600, height: 800 },
+  { src: withBase('/images/studio/instagram/03.jpg'), alt: 'Warm lighting and textures inside Prana', width: 600, height: 800 },
+  { src: withBase('/images/studio/instagram/04.jpg'), alt: 'A yoga class in session at Prana', width: 600, height: 800 },
+  { src: withBase('/images/studio/instagram/05.jpg'), alt: 'Two members hugging after class', width: 600, height: 800 },
+  { src: withBase('/images/studio/instagram/06.jpg'), alt: 'Students settling in before yoga class', width: 600, height: 800 },
+  { src: withBase('/images/studio/instagram/07.jpg'), alt: 'Overhead view of a yoga stretch', width: 600, height: 800 },
+  { src: withBase('/images/studio/instagram/08.jpg'), alt: 'The Prana Wellness Club studio interior', width: 600, height: 800 },
+  { src: withBase('/images/studio/instagram/09.jpg'), alt: 'Staff passing out towels before class', width: 600, height: 800 },
 ];
 
 const amenities = [
@@ -161,7 +133,7 @@ const jsonLd = {
 <BaseLayout title={title} description={description} ogImage="/images/og/studio.jpg" canonical={canonical}>
   <script type="application/ld+json" slot="jsonld" set:html={JSON.stringify(jsonLd)} />
 
-  <!-- SECTION 1 — HERO -->
+  <!-- SECTION 1 — HERO (cinematic letterbox banner) -->
   <section class="studio-hero" aria-labelledby="studio-headline" data-header-watch="hero">
     <div class="studio-hero__media">
       <img
@@ -183,75 +155,103 @@ const jsonLd = {
     </div>
   </section>
 
-  <!-- SECTION 2 — THE STORY -->
-  <section class="studio-story">
-    <div class="studio-story__grid">
-      <div class="studio-story__copy">
+  <!-- SECTION 2 — OUR STORY (animated SVG timeline) -->
+  <section class="timeline" aria-labelledby="timeline-headline">
+    <div class="container">
+      <div class="timeline__header">
         <span class="eyebrow">Our story</span>
-        <h2 class="studio-story__headline">We built the room we wished existed.</h2>
-
-        <p class="studio-story__body">
-          Prana started as a conversation between friends who kept driving across Austin to find a studio that didn't feel like a franchise. The lighting was always wrong, or the equipment was tired, or the vibe was more "corporate wellness" than actual wellness. We wanted warm wood, real plants, good light, and teachers who stuck around long enough to learn your name.
-        </p>
-
-        <p class="studio-story__body">
-          So we built it. A 4,000-square-foot studio on East 7th, from the ground up. Custom wooden reformers from a shop in Oregon. Heated floors in the yoga room. An infrared sauna because dry heat is non-negotiable. A cold plunge because someone on the team wouldn't shut up about it until we added one.
-        </p>
-
-        <blockquote class="studio-story__quote">
-          "We wanted a room that felt like it exhaled when you walked in."
-        </blockquote>
-
-        <p class="studio-story__body">
-          Today Prana is a full studio with more than twenty classes a week across Pilates, yoga, and strength. But the original idea hasn't changed. We still think a studio should feel like a place you want to be in, not just a room you sweat in.
-        </p>
-      </div>
-
-      <div class="studio-story__image">
-        <img
-          src={storyImage}
-          alt="A member practicing on a wooden reformer at Prana, with arched alcoves in the background"
-          width="816"
-          height="1020"
-          loading="lazy"
-        />
+        <h2 id="timeline-headline" class="timeline__headline">How we got here.</h2>
       </div>
     </div>
+
+    <div class="timeline__body">
+      <svg class="timeline__svg" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 200 1000">
+        <path
+          class="timeline__path"
+          d="M100,0 C40,80 160,160 100,250 C40,340 160,420 100,500 C40,580 160,660 100,750 C40,840 160,920 100,1000"
+          fill="none"
+          stroke="var(--color-terracotta)"
+          stroke-opacity="0.35"
+          stroke-width="2"
+        />
+      </svg>
+
+      <!-- Dots positioned by JS to align with milestones -->
+      <div class="timeline__dot" aria-hidden="true"><span class="timeline__dot-outer"></span><span class="timeline__dot-inner"></span></div>
+      <div class="timeline__dot" aria-hidden="true"><span class="timeline__dot-outer"></span><span class="timeline__dot-inner"></span></div>
+      <div class="timeline__dot" aria-hidden="true"><span class="timeline__dot-outer"></span><span class="timeline__dot-inner"></span></div>
+
+      <div class="timeline__milestones">
+        <!-- Milestone 1 — The Idea -->
+        <div class="timeline__milestone timeline__milestone--left">
+          <span class="eyebrow timeline__year">2023</span>
+          <h3 class="timeline__milestone-title">The Idea</h3>
+          <p class="timeline__milestone-body">It started with a complaint that turned into a question. A handful of friends, all driving thirty minutes across Austin to studios that never quite felt right. Too cold, too corporate, too much like a gym wearing yoga pants. Someone finally said, "What if we just built our own?" That was the conversation that wouldn't go away.</p>
+        </div>
+
+        <!-- Milestone 2 — The Build -->
+        <div class="timeline__milestone timeline__milestone--right">
+          <span class="eyebrow timeline__year">2024</span>
+          <h3 class="timeline__milestone-title">The Build</h3>
+          <p class="timeline__milestone-body">A 4,000-square-foot shell on East 7th. The floors went in heated because cold feet ruin a good savasana. The reformers came from a small woodworker in Oregon who builds them one at a time. An infrared sauna, because dry heat was non-negotiable. A cold plunge, because one of us wouldn't stop talking about it. The arched alcoves in the walls weren't in the original plans. We added them because the space needed somewhere for the eye to rest.</p>
+        </div>
+
+        <!-- Milestone 3 — Opening Day -->
+        <div class="timeline__milestone timeline__milestone--left">
+          <span class="eyebrow timeline__year">2024</span>
+          <h3 class="timeline__milestone-title">Opening Day</h3>
+          <p class="timeline__milestone-body">Prana opened with six classes a week and a handful of members who were mostly just friends being supportive. Within a month the waitlist was real. Today we run more than twenty classes a week across yoga, Pilates, and strength, and the Friday night flow has a habit of turning into something closer to a dinner party. The original idea hasn't changed: a studio should feel like a place you want to be in, not just a room you sweat in.</p>
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="timeline__quote">
+      "We didn't set out to open a studio. We set out to build the room we kept wishing existed."
+    </blockquote>
   </section>
 
-  <!-- SECTION 3 — VISUAL TOUR -->
-  <section class="gallery">
+  <!-- SECTION 3 — INSTAGRAM GRID -->
+  <section class="insta" aria-labelledby="insta-headline">
     <div class="container">
-      <div class="gallery__header">
-        <span class="eyebrow">The space</span>
-        <h2 class="gallery__headline">See for yourself.</h2>
+      <div class="insta__header">
+        <span class="eyebrow">@pranawellness</span>
+        <h2 id="insta-headline" class="insta__headline">Follow along.</h2>
       </div>
 
-      <div class="gallery__grid">
-        {galleryImages.map((img) => (
-          <div class="gallery__item">
-            <div class="gallery__img-wrap">
-              <img
-                src={img.src}
-                alt={img.alt}
-                width={img.width}
-                height={img.height}
-                loading="lazy"
-                class="gallery__img"
-              />
-            </div>
+      <div class="insta__grid">
+        {instagramImages.map((img) => (
+          <div class="insta__cell">
+            <img
+              src={img.src}
+              alt={img.alt}
+              width={img.width}
+              height={img.height}
+              loading="lazy"
+              class="insta__img"
+            />
           </div>
         ))}
+      </div>
+
+      <div class="insta__follow">
+        <a
+          href="https://www.instagram.com/pranawellnessclub/"
+          target="_blank"
+          rel="noreferrer noopener"
+          class="link-arrow"
+        >
+          Follow us on Instagram <span aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- SECTION 4 — AMENITIES -->
-  <section class="amenities">
+  <section class="amenities" aria-labelledby="amenities-headline">
     <div class="container">
       <div class="amenities__header">
         <span class="eyebrow">Amenities</span>
-        <h2 class="amenities__headline">Everything under one roof.</h2>
+        <h2 id="amenities-headline" class="amenities__headline">Everything under one roof.</h2>
         <p class="amenities__intro">Prana isn't just a place to take a class. It's a full studio with recovery, community, and a reason to stay longer than you planned.</p>
       </div>
 
@@ -285,11 +285,11 @@ const jsonLd = {
   </section>
 
   <!-- SECTION 5 — MEMBERSHIP CTA -->
-  <section class="studio-membership">
+  <section class="studio-membership" aria-labelledby="membership-headline">
     <div class="studio-membership__grid">
       <div class="studio-membership__copy">
         <span class="eyebrow">Membership</span>
-        <h2 class="studio-membership__headline">One membership. The whole space.</h2>
+        <h2 id="membership-headline" class="studio-membership__headline">One membership. The whole space.</h2>
         <p class="studio-membership__body">
           Unlimited classes, full access to the sauna, cold plunge, and lounge, and first priority on workshops and events. No contracts, no long commitments. Cancel any time.
         </p>
@@ -314,16 +314,77 @@ const jsonLd = {
   </section>
 
   <!-- SECTION 6 — FIND US -->
-  <FindUs bg="cream" />
+  <FindUs bg="warm-white" />
 </BaseLayout>
 
+<!-- Tiny inline script: set --path-length for scroll-draw + Safari fallback -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const path = document.querySelector('.timeline__path') as SVGPathElement | null;
+    if (!path) return;
+
+    const length = path.getTotalLength();
+    path.style.setProperty('--path-length', String(length));
+
+    // Position dot nodes to align with actual milestone elements
+    const body = document.querySelector('.timeline__body') as HTMLElement | null;
+    const milestones = document.querySelectorAll('.timeline__milestone');
+    const dots = document.querySelectorAll('.timeline__dot') as NodeListOf<HTMLElement>;
+    const svg = document.querySelector('.timeline__svg') as SVGElement | null;
+
+    function positionDots() {
+      if (!body || !svg) return;
+      const bodyRect = body.getBoundingClientRect();
+      const svgRect = svg.getBoundingClientRect();
+      const svgCenterX = svgRect.left + svgRect.width / 2 - bodyRect.left;
+
+      milestones.forEach((ms, i) => {
+        if (!dots[i]) return;
+        const msRect = ms.getBoundingClientRect();
+        const dotTop = msRect.top - bodyRect.top;
+        dots[i].style.left = `${svgCenterX - 8}px`;
+        dots[i].style.top = `${dotTop}px`;
+      });
+    }
+
+    positionDots();
+    window.addEventListener('resize', positionDots);
+
+    // Safari fallback: no support for animation-timeline: scroll()
+    const supportsScrollTimeline = CSS.supports('animation-timeline', 'scroll()');
+    if (!supportsScrollTimeline) {
+      const section = body;
+      if (!section) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              section.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      observer.observe(section);
+    }
+  });
+</script>
+
 <style>
-  /* ==================== SECTION 1 — HERO ==================== */
+  /* ==================== SECTION 1 — HERO (letterbox banner) ==================== */
   .studio-hero {
     position: relative;
-    min-height: 100svh;
+    min-height: 45svh;
     overflow: hidden;
     isolation: isolate;
+  }
+
+  @media (min-width: 1024px) {
+    .studio-hero {
+      min-height: 55svh;
+    }
   }
 
   .studio-hero__media {
@@ -344,21 +405,27 @@ const jsonLd = {
   .studio-hero__gradient {
     position: absolute;
     inset: 0;
-    background: rgba(58, 42, 34, 0.45);
+    background: rgba(58, 42, 34, 0.32);
   }
 
   .studio-hero__content {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     max-width: var(--content-max);
-    padding-inline: var(--space-2xl);
+    margin-inline: auto;
+    padding: 0 var(--space-lg) var(--space-2xl);
+  }
+
+  @media (min-width: 1024px) {
+    .studio-hero__content {
+      padding: 0 var(--space-2xl) var(--space-3xl);
+    }
   }
 
   .studio-hero__eyebrow {
@@ -384,7 +451,6 @@ const jsonLd = {
     max-width: 48ch;
     line-height: 1.5;
     margin-bottom: var(--space-xl);
-    text-align: center;
   }
 
   @media (max-width: 639px) {
@@ -394,126 +460,249 @@ const jsonLd = {
     }
   }
 
-  /* ==================== SECTION 2 — THE STORY ==================== */
-  .studio-story {
+  /* ==================== SECTION 2 — TIMELINE ==================== */
+  .timeline {
     background-color: var(--color-warm-white);
-    padding: var(--space-4xl) var(--space-lg);
+    padding: var(--space-4xl) 0;
   }
 
   @media (min-width: 1024px) {
-    .studio-story { padding: var(--space-6xl) var(--space-2xl); }
-  }
-
-  .studio-story__grid {
-    max-width: var(--content-max);
-    margin-inline: auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-2xl);
-  }
-
-  @media (min-width: 1024px) {
-    .studio-story__grid {
-      grid-template-columns: repeat(12, 1fr);
-      gap: var(--space-2xl);
-      align-items: start;
+    .timeline {
+      padding: var(--space-5xl) 0;
     }
   }
 
-  .studio-story__copy {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-    max-width: 600px;
+  .timeline__header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
   }
 
-  @media (min-width: 1024px) {
-    .studio-story__copy {
-      grid-column: 6 / span 6;
-      grid-row: 1;
-    }
-  }
-
-  .studio-story__copy .eyebrow {
+  .timeline__header .eyebrow {
     color: var(--color-terracotta);
+    margin-bottom: var(--space-md);
   }
 
-  .studio-story__headline {
+  .timeline__headline {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: var(--size-h2);
     line-height: var(--line-tight);
     color: var(--color-deep-brown);
-    max-width: 18ch;
   }
 
-  .studio-story__body {
+  .timeline__body {
+    position: relative;
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding-inline: var(--space-lg);
+  }
+
+  @media (min-width: 1024px) {
+    .timeline__body {
+      padding-inline: var(--space-2xl);
+    }
+  }
+
+  /* SVG path */
+  .timeline__svg {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .timeline__svg {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+  }
+
+  /* Mobile: SVG as a thin left-edge line */
+  @media (max-width: 1023px) {
+    .timeline__svg {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 20px;
+      width: 40px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+  }
+
+  /* Scroll-draw animation (Chrome, Firefox) */
+  .timeline__path {
+    stroke-dasharray: var(--path-length);
+    stroke-dashoffset: var(--path-length);
+    animation: draw-path linear forwards;
+    animation-timeline: scroll(nearest block);
+    animation-range: entry 20% exit 80%;
+  }
+
+  @keyframes draw-path {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Safari fallback: animate on visibility */
+  @supports not (animation-timeline: scroll()) {
+    .timeline__path {
+      animation: none;
+      transition: stroke-dashoffset 2.5s ease-out;
+    }
+
+    .is-visible .timeline__path {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Reduced motion: show full path immediately */
+  @media (prefers-reduced-motion: reduce) {
+    .timeline__path {
+      animation: none;
+      stroke-dashoffset: 0;
+      transition: none;
+    }
+  }
+
+  /* Milestones */
+  .timeline__milestones {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4xl);
+  }
+
+  .timeline__milestone {
+    position: relative;
+  }
+
+  /* Milestone dot nodes — positioned by JS to align with actual milestones */
+  .timeline__dot {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .timeline__dot-outer {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-terracotta);
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .timeline__dot-inner {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-terracotta);
+    position: absolute;
+    top: 4px;
+    left: 4px;
+  }
+
+  .timeline__year {
+    color: var(--color-terracotta);
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .timeline__milestone-title {
+    font-family: var(--font-display);
+    font-size: var(--size-h3);
+    font-weight: 500;
+    color: var(--color-deep-brown);
+    line-height: var(--line-snug);
+    margin-bottom: var(--space-md);
+  }
+
+  .timeline__milestone-body {
     font-family: var(--font-body);
     font-weight: 400;
     font-size: var(--size-body);
     line-height: var(--line-body);
     color: var(--color-espresso);
-    max-width: 56ch;
+    max-width: 48ch;
   }
 
-  .studio-story__quote {
+  /* Mobile: left-aligned with padding for SVG line */
+  @media (max-width: 1023px) {
+    .timeline__milestone {
+      padding-left: 56px;
+    }
+  }
+
+  /* Desktop: 12-col grid, alternating left/right */
+  @media (min-width: 1024px) {
+    .timeline__milestones {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--space-4xl) 0;
+    }
+
+    .timeline__milestone--left {
+      grid-column: 1 / 6;
+      text-align: left;
+    }
+
+    .timeline__milestone:nth-child(1) { grid-row: 1; }
+    .timeline__milestone:nth-child(2) { grid-row: 2; }
+    .timeline__milestone:nth-child(3) { grid-row: 3; }
+
+    .timeline__milestone--right {
+      grid-column: 7 / 12;
+      text-align: left;
+    }
+  }
+
+  /* Pull quote */
+  .timeline__quote {
     font-family: var(--font-display);
     font-size: var(--size-h3);
     font-weight: 400;
     font-style: italic;
     line-height: var(--line-snug);
     color: var(--color-terracotta);
-    max-width: 22ch;
-    margin-block: var(--space-xl);
+    text-align: center;
+    max-width: 32ch;
+    margin: var(--space-4xl) auto 0;
+    padding-inline: var(--space-lg);
   }
 
-  .studio-story__image {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    overflow: hidden;
-    border-radius: var(--radius-sm);
-    background-color: var(--color-placeholder);
-    order: 1;
-  }
-
-  .studio-story__image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  @media (min-width: 1024px) {
-    .studio-story__image {
-      grid-column: 1 / span 4;
-      grid-row: 1;
-      max-width: 420px;
-      margin-top: var(--space-3xl);
-      order: unset;
-    }
-  }
-
-  /* ==================== SECTION 3 — VISUAL TOUR ==================== */
-  .gallery {
+  /* ==================== SECTION 3 — INSTAGRAM GRID ==================== */
+  .insta {
     background-color: var(--color-cream);
     padding: var(--space-4xl) 0;
   }
 
   @media (min-width: 1024px) {
-    .gallery { padding: var(--space-5xl) 0; }
+    .insta {
+      padding: var(--space-5xl) 0;
+    }
   }
 
-  .gallery__header {
-    margin-bottom: var(--space-3xl);
-    max-width: 36ch;
+  .insta__header {
+    margin-bottom: var(--space-2xl);
   }
 
-  .gallery__header .eyebrow {
+  .insta__header .eyebrow {
     color: var(--color-terracotta);
     margin-bottom: var(--space-md);
   }
 
-  .gallery__headline {
+  .insta__headline {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: var(--size-h2);
@@ -521,85 +710,52 @@ const jsonLd = {
     color: var(--color-deep-brown);
   }
 
-  .gallery__grid {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
+  .insta__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: var(--content-max);
   }
 
-  .gallery__img-wrap {
+  @media (min-width: 768px) {
+    .insta__grid {
+      gap: 3px;
+    }
+  }
+
+  .insta__cell {
+    aspect-ratio: 3 / 4;
     overflow: hidden;
-    border-radius: var(--radius-sm);
-    background-color: var(--color-placeholder);
   }
 
-  .gallery__img {
+  .insta__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform var(--dur-slow) var(--ease-out);
+    transition: filter var(--dur-med) var(--ease-out), transform var(--dur-med) var(--ease-out);
   }
 
-  .gallery__img-wrap:hover .gallery__img {
-    transform: scale(1.02);
-  }
-
-  @media (min-width: 768px) {
-    .gallery__grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-md);
-    }
-
-    .gallery__item:nth-child(odd) .gallery__img-wrap {
-      aspect-ratio: 4 / 3;
-    }
-
-    .gallery__item:nth-child(even) .gallery__img-wrap {
-      aspect-ratio: 3 / 4;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .gallery__grid {
-      grid-template-columns: repeat(12, 1fr);
-      gap: var(--space-lg);
-    }
-
-    /* Row 1 */
-    .gallery__item:nth-child(1) { grid-column: 1 / 8; }
-    .gallery__item:nth-child(1) .gallery__img-wrap { aspect-ratio: 16 / 11; }
-
-    .gallery__item:nth-child(2) { grid-column: 8 / 13; }
-    .gallery__item:nth-child(2) .gallery__img-wrap { aspect-ratio: 4 / 5; }
-
-    /* Row 2 */
-    .gallery__item:nth-child(3) { grid-column: 1 / 5; }
-    .gallery__item:nth-child(3) .gallery__img-wrap { aspect-ratio: 1 / 1; }
-
-    .gallery__item:nth-child(4) { grid-column: 5 / 13; }
-    .gallery__item:nth-child(4) .gallery__img-wrap { aspect-ratio: 16 / 10; }
-
-    /* Row 3 */
-    .gallery__item:nth-child(5) { grid-column: 1 / 6; }
-    .gallery__item:nth-child(5) .gallery__img-wrap { aspect-ratio: 4 / 5; }
-
-    .gallery__item:nth-child(6) { grid-column: 6 / 13; }
-    .gallery__item:nth-child(6) .gallery__img-wrap { aspect-ratio: 3 / 2; }
+  .insta__cell:hover .insta__img {
+    filter: brightness(1.05);
+    transform: scale(1.03);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .gallery__img {
+    .insta__img {
       transition: none;
     }
   }
 
+  .insta__follow {
+    text-align: center;
+    margin-top: var(--space-2xl);
+  }
+
   /* ==================== SECTION 4 — AMENITIES ==================== */
   .amenities {
-    background-color: var(--color-cream);
+    background-color: var(--color-warm-white);
     padding: var(--space-4xl) 0;
-    border-top: 1px solid var(--color-hairline);
   }
 
   @media (min-width: 1024px) {
@@ -724,9 +880,8 @@ const jsonLd = {
 
   /* ==================== SECTION 5 — MEMBERSHIP CTA ==================== */
   .studio-membership {
-    background-color: var(--color-warm-white);
+    background-color: var(--color-cream);
     padding: var(--space-4xl) var(--space-lg);
-    border-top: 1px solid var(--color-hairline);
   }
 
   @media (min-width: 1024px) {
@@ -796,7 +951,6 @@ const jsonLd = {
   }
 
   .studio-membership__image-wrap {
-    order: -1;
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
